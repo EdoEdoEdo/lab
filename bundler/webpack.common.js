@@ -4,9 +4,9 @@ const path = require("path"),
   HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const pages = [
+  "bird",
   "flag",
   "geometries",
-  "bird",
 ];
 
 module.exports = {
