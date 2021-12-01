@@ -7,6 +7,7 @@ const pages = [
   "bird",
   "flag",
   "geometries",
+  "scroll",
 ];
 
 module.exports = {

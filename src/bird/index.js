@@ -6,7 +6,7 @@ var logo = document.querySelector('.logo-header'),
 
 window.addEventListener('scroll', function() {
   var scrolled = window.scrollY;
-  logo.style.transform = "translate(0px," + scrolled/2 +"%)";
-  blurredBird.style.transform = "translate(0px," + scrolled/5 +"%)";
-  foreBird.style.transform = "translate(0px,-" + scrolled/80 +"%)";
+  // logo.style.transform = "translate(0px," + scrolled/2 +"%)";
+  // blurredBird.style.transform = "translate(0px," + scrolled/5 +"%)";
+  // foreBird.style.transform = "translate(0px,-" + scrolled/80 +"%)";
 });
