@@ -5,6 +5,7 @@ const path = require("path"),
 
 const pages = [
   "bird",
+  "airplanes",
   "flag",
   "geometries",
   "scroll",
@@ -68,11 +69,13 @@ module.exports = {
 
       // CSS
       {
-        test: /\.css$/,
+        test: /\.s[ac]ss$/i,
         use:
         [
             MiniCSSExtractPlugin.loader,
-            'css-loader'
+            'css-loader',
+            // Compiles Sass to CSS
+            'sass-loader',
         ]
       },
 

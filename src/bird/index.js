@@ -1,4 +1,4 @@
-import './style.css'
+import './style.scss'
 
 var logo = document.querySelector('.logo-header'),
     blurredBird = document.querySelector('.back-bird'),
