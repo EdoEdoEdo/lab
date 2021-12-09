@@ -1,0 +1,13 @@
+
+html, body
+{
+	margin: 0;
+	// overflow: hidden;
+	min-height: 100%;
+	min-width: 100%;
+	font-family: 'Libre Baskerville', serif;
+	background-color: var(--color-background);
+	font-weight: 400;
+	font-size: var(--font-size-normal);
+	overflow-x: hidden;
+}
