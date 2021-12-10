@@ -95,6 +95,7 @@ document.addEventListener('keydown', event => {
 })
 
 // SpotLight
+// =================
 const color = 0xFFFFFF;
 const intensity = 1;
 const light = new THREE.SpotLight(color, intensity);
@@ -107,6 +108,31 @@ scene.add(light.target);
 // SpotLight Helper
 const cameraHelper = new THREE.CameraHelper(light.shadow.camera);
 scene.add(cameraHelper);
+// =================
+
+// Directional Light
+// =================
+// const color = 0xFFFFFF;
+// const intensity = 1;
+// const light = new THREE.DirectionalLight(color, intensity);
+// light.castShadow = true;
+// light.position.set(7, 7, -7);
+// light.target.position.set(0, 0, 0);
+// scene.add(light);
+// scene.add(light.target);
+
+// const cameraHelper = new THREE.CameraHelper(light.shadow.camera);
+// scene.add(cameraHelper);
+
+// const helper = new THREE.DirectionalLightHelper(light);
+// scene.add(helper);
+// =================
+
+// Ambient Light
+// =================
+// var ambientLight = new THREE.AmbientLight(0xffffff);
+// scene.add(ambientLight);
+// =================
 
 /**
  * Camera
