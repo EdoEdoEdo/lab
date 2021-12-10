@@ -1,8 +1,6 @@
-import './style.scss'
+import './style.scss';
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-
 
 /**
  * Base
@@ -20,23 +18,11 @@ scene.add(axis)
 /**
  * Object
  */
-// const geometry = new THREE.BoxGeometry(1, 1, 1)
-// const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
-// const mesh = new THREE.Mesh(geometry, material)
-// scene.add(mesh)
+const geometry = new THREE.BoxGeometry(1, 1, 1)
+const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+const mesh = new THREE.Mesh(geometry, material)
+scene.add(mesh)
 
-const loader = new GLTFLoader();
-loader.load( 'models/camera/scene.glb', function ( gltf ) {
-
-  console.log('loaded', gltf);
-  gltf.scene.position.set(0, -1, 0);
-  scene.add( gltf.scene );
-
-}, undefined, function ( error ) {
-
-  console.error( error );
-
-} );
 /**
  * Sizes
  */
@@ -49,17 +35,13 @@ loader.load( 'models/camera/scene.glb', function ( gltf ) {
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(25, sizes.width / sizes.height, 0.1, 100)
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.z = 3
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
-
-const light = new THREE.DirectionalLight( 0xffffff, 1 );
-light.position.set( 2, 5, 2 );
-scene.add( light );
 
 /**
  * Renderer
@@ -68,7 +50,6 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
-renderer.setClearColor(0xffffff, 1.0);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**

@@ -10,6 +10,7 @@ const pages = [
   "flag",
   "geometries",
   "scroll",
+  "template",
 ];
 
 module.exports = {
