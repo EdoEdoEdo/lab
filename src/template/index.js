@@ -29,7 +29,27 @@ const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
 const mesh = new THREE.Mesh(geometry, material)
 mesh.name = 'cube'
+mesh.castShadow = true
 scene.add(mesh)
+
+// Plane
+const loader = new THREE.TextureLoader();
+const texture = loader.load('https://threejsfundamentals.org/threejs/resources/images/checker.png');
+texture.wrapS = THREE.RepeatWrapping;
+texture.wrapT = THREE.RepeatWrapping;
+texture.magFilter = THREE.NearestFilter;
+const repeats = 20;
+texture.repeat.set(repeats, repeats);
+
+const planeGeo = new THREE.PlaneBufferGeometry(40, 40);
+const planeMat = new THREE.MeshPhongMaterial({
+  map: texture,
+  side: THREE.DoubleSide,
+});
+const plane = new THREE.Mesh(planeGeo, planeMat);
+plane.receiveShadow = true;
+plane.rotation.x = Math.PI * -.5;
+scene.add(plane);
 
 /**
  * Debug
@@ -59,26 +79,44 @@ document.addEventListener('keydown', event => {
   document.onkeydown = function(e) {
     switch (e.keyCode) {
       case 37:
-      cube.rotation.x += 0.1;
-      break;
+        cube.position.x -= 0.1;
+        break;
       case 38:
-      cube.rotation.z -= 0.1;
-      break;
+        cube.position.y += 0.1;
+        break;
       case 39:
-      cube.rotation.x -= 0.1;
-      break;
+        cube.position.x += 0.1;
+        break;
       case 40:
-      cube.rotation.z += 0.1;
-      break;
+        cube.position.y -= 0.1;
+        break;
     }
   };
 })
+
+// SpotLight
+const color = 0xFFFFFF;
+const intensity = 1;
+const light = new THREE.SpotLight(color, intensity);
+light.castShadow = true;
+light.position.set(0, 2, 0);
+light.target.position.set(0, 0, 0);
+scene.add(light);
+scene.add(light.target);
+
+// SpotLight Helper
+const cameraHelper = new THREE.CameraHelper(light.shadow.camera);
+scene.add(cameraHelper);
+
 /**
  * Camera
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+// const camera = new THREE.OrthographicCamera( window.innerWidth / - 50, window.innerWidth / 50, window.innerHeight / 50, window.innerHeight / -50, - 500, 1000);
 camera.position.z = 3
+camera.position.y = 2
+camera.position.x = 2
 scene.add(camera)
 
 // Controls
@@ -93,6 +131,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.shadowMapEnabled = true;
 
 /**
  * Animate
