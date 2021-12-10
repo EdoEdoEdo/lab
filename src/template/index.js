@@ -28,6 +28,7 @@ scene.add(axis)
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
 const mesh = new THREE.Mesh(geometry, material)
+mesh.name = 'cube'
 scene.add(mesh)
 
 /**
@@ -52,6 +53,26 @@ scene.add(mesh)
     height: window.innerHeight
 }
 
+// Keyboard controls
+var cube = scene.getObjectByName('cube');
+document.addEventListener('keydown', event => {
+  document.onkeydown = function(e) {
+    switch (e.keyCode) {
+      case 37:
+      cube.rotation.x += 0.1;
+      break;
+      case 38:
+      cube.rotation.z -= 0.1;
+      break;
+      case 39:
+      cube.rotation.x -= 0.1;
+      break;
+      case 40:
+      cube.rotation.z += 0.1;
+      break;
+    }
+  };
+})
 /**
  * Camera
  */
