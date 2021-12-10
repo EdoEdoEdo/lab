@@ -1,6 +1,8 @@
 import './style.scss';
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import Stats from 'three/examples/jsm/libs/stats.module'
+
 
 /**
  * Base
@@ -11,6 +13,9 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+// Stats
+const stats = new Stats()
+document.body.appendChild(stats.dom)
 
 const axis = new THREE.AxesHelper(4)
 scene.add(axis)
@@ -66,6 +71,9 @@ const tick = () =>
 
     // Render
     renderer.render(scene, camera)
+
+    // Stats
+    stats.update()
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
