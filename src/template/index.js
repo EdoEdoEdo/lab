@@ -2,7 +2,7 @@ import './style.scss';
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Stats from 'three/examples/jsm/libs/stats.module'
-
+import * as dat from 'dat.gui'
 
 /**
  * Base
@@ -17,6 +17,8 @@ const scene = new THREE.Scene()
 const stats = new Stats()
 document.body.appendChild(stats.dom)
 
+
+
 const axis = new THREE.AxesHelper(4)
 scene.add(axis)
 
@@ -27,6 +29,20 @@ const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
+
+/**
+ * Debug
+ */
+ const gui = new dat.GUI()
+ gui
+ .add(mesh.position, 'y')
+ .min(- 3)
+ .max(3)
+ .step(0.01)
+ .name('elevation')
+ gui.add(mesh, 'visible')
+ gui.add(material, 'wireframe')
+ gui.add(axis, 'visible').name('axes')
 
 /**
  * Sizes
