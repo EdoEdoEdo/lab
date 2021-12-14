@@ -9,6 +9,7 @@ const pages = [
   "camera",
   "flag",
   "geometries",
+  "horizontal",
   "scroll",
   "template",
 ];
