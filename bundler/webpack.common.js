@@ -14,6 +14,7 @@ const pages = [
   "scroll",
   "scrolltrigger",
   "template",
+  "untitled",
 ];
 
 module.exports = {
