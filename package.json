@@ -20,6 +20,7 @@
     "html-webpack-plugin": "^5.3.2",
     "mini-css-extract-plugin": "^2.0.0",
     "portfinder-sync": "0.0.2",
+    "postprocessing": "^6.23.3",
     "raw-loader": "^4.0.2",
     "scrolltrigger": "^1.0.1",
     "smooth-scrollbar": "^8.7.0",

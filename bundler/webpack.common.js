@@ -15,6 +15,7 @@ const pages = [
   "scrolltrigger",
   "template",
   "untitled",
+  "xmas",
 ];
 
 module.exports = {
