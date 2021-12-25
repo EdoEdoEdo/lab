@@ -15,6 +15,7 @@ const pages = [
   "scroll",
   "scrolltrigger",
   "template",
+  "toggle-actions",
   "untitled",
   "xmas",
 ];
