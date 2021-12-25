@@ -1,0 +1,63 @@
+body {
+    background-color: black;
+    overflow: hidden;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .ball {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid white;
+  }
+
+  .dots {
+    position: fixed;
+    bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: clamp(800px, 80vw, 600px);
+
+    .dot {
+      background-color: white;
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  .controls {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    .btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+  }
+
+  .ball-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+
+    .ball-ctrl {
+      width: 20px;
+      height: 20px;
+      background-color: black;
+      border-radius: 50%;
+    }
+  }

@@ -11,6 +11,7 @@ const pages = [
   "geometries",
   "glitch",
   "horizontal",
+  "intro",
   "scroll",
   "scrolltrigger",
   "template",
