@@ -46,7 +46,7 @@ gsap.to(".ball-5", {
   scrollTrigger: {
     trigger: ".panel-5",
     start: "top 0",
-    end: "+=600px",
+    end: "100%",
     scrub: 1,
     pin: true,
     pinSpacing: true

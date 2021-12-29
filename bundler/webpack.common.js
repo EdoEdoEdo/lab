@@ -5,6 +5,7 @@ const path = require("path"),
 
 const pages = [
   "airplanes",
+  "aviator",
   "bird",
   "camera",
   "flag",
