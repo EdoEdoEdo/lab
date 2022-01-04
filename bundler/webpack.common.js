@@ -13,6 +13,7 @@ const pages = [
   "glitch",
   "horizontal",
   "intro",
+  "ocean",
   "scroll",
   "scrolltrigger",
   "template",

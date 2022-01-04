@@ -214,7 +214,6 @@ for (var i=0; i<nBlocs; i++ ){
 var sea;
 var airplane;
 var sky;
-
 function createPlane(){
 airplane = new AirPlane();
 airplane.mesh.scale.set(.25,.25,.25);
