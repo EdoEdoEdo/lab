@@ -18,6 +18,7 @@
     "gsap": "^3.8.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
+    "lil-gui": "^0.16.0",
     "mini-css-extract-plugin": "^2.0.0",
     "portfinder-sync": "0.0.2",
     "postprocessing": "^6.23.3",

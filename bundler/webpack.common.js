@@ -9,6 +9,7 @@ const pages = [
   "bird",
   "camera",
   "flag",
+  "fireflies",
   "geometries",
   "glitch",
   "horizontal",
