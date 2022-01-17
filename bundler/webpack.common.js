@@ -13,6 +13,7 @@ const pages = [
   "geometries",
   "glitch",
   "horizontal",
+  "howler",
   "intro",
   "loader",
   "ocean",
@@ -106,6 +107,12 @@ module.exports = {
             }
         ]
       },
+
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader'
+      },
+
 
       // Fonts
       {
