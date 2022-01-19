@@ -1,5 +1,5 @@
 import './style.scss';
-import { Howl, Howler } from 'howler'
+import { Howl } from 'howler'
 import Tick from './tick.mp3'
 
 const tick = new Howl({

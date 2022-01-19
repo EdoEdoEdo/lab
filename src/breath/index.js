@@ -1,4 +1,5 @@
 import './style.scss';
+import { frag } from './frag.js';
 
 import GlslCanvas from 'glslCanvas';
 
