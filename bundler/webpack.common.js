@@ -7,6 +7,7 @@ const pages = [
   "airplanes",
   "aviator",
   "bird",
+  "breath",
   "camera",
   "flag",
   "fireflies",
