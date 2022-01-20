@@ -16,6 +16,7 @@ const pages = [
   "horizontal",
   "howler",
   "intro",
+  "kaleidoscope",
   "loader",
   "ocean",
   "scroll",
