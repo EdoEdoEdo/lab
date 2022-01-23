@@ -20,6 +20,7 @@ const pages = [
   "loader",
   "ocean",
   "scroll",
+  "site",
   "scrolltrigger",
   "template",
   "toggle-actions",

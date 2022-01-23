@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap');
+
+h1,
+html,
+body {
+  font-family: 'Jura', sans-serif;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+}
+
+
+body {
+  --color-text: #ff0000;
+  --color-bg: #171717;
+  --color-line: #292929;
+  --color-link: #ff0000;
+  --color-link-hover: #ff0000;
+  --color-info: #ff0000;
+  --color-white: #ffffff;
+  &,
+  a {
+    cursor: none;
+    color: var(--color-text);
+    text-decoration: none;
+
+    &:visited {
+      color: var(--color-text);
+    }
+  }
+
+  .circle-cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    &--outer {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--color-white);
+      z-index: 12000;
+      opacity: 0.2;
+    }
+    &--inner {
+      width: 5px;
+      height: 5px;
+      left: -2.5px;
+      top: -2.5px;
+      z-index: 11000;
+      background: var(--color-text);
+    }
+  }
+}
+
+.link {
+  font-size: 14px;
+}
+
+.info {
+  position: fixed;
+  top: 30px;
+  left: 48px;
+  color: #f2f2f2;
+  line-height: 1.5;
+
+  span {
+    color: grey;
+  }
+}
+
+
+.bar-container {
+  position: fixed;
+  right: 48px;
+  bottom: 48px;
+  height: 100px;
+
+  .bar {
+    width: 1px;
+    height: 100%;
+    border-radius: 20px;
+    background: rgb(255, 255, 255, 0.6);
+    overflow: hidden;
+  }
+
+  .red-bar {
+    width: 1px;
+    height: 100%;
+    border-radius: 20px;
+    background: #ff0000;
+    opacity: 0.6;
+    transform: translateY(100px);
+    will-change: transform;
+  }
+}
