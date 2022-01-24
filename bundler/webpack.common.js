@@ -2,6 +2,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const path = require("path"),
   HtmlWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const pages = [
   "airplanes",
@@ -58,7 +59,8 @@ module.exports = {
           { from: path.resolve(__dirname, '../static') }
       ]
     }),
-    new MiniCSSExtractPlugin()
+    new MiniCSSExtractPlugin(),
+    new FaviconsWebpackPlugin('./static/favicon.ico')
   ),
   module:
   {
