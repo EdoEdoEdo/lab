@@ -15,12 +15,13 @@ const pages = [
   "glitch",
   "horizontal",
   "howler",
+  "index",
   "intro",
   "kaleidoscope",
+  "lab",
   "loader",
   "ocean",
   "scroll",
-  "site",
   "scrolltrigger",
   "template",
   "toggle-actions",
@@ -56,11 +57,6 @@ module.exports = {
       patterns: [
           { from: path.resolve(__dirname, '../static') }
       ]
-    }),
-    new HtmlWebpackPlugin({
-        inject: false,
-        template: path.resolve(__dirname, '../src/index.html'),
-        minify: true
     }),
     new MiniCSSExtractPlugin()
   ),
