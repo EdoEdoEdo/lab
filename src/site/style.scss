@@ -37,6 +37,11 @@ body {
   }
 
   .circle-cursor {
+
+    @media only screen and (max-width: 800px) {
+      display: none;
+    }
+
     position: fixed;
     left: 0;
     top: 0;
@@ -65,6 +70,11 @@ body {
 }
 
 .info {
+
+  @media only screen and (max-width: 800px) {
+    left: 20px;
+  }
+
   position: fixed;
   top: 30px;
   left: 48px;
@@ -78,6 +88,12 @@ body {
 
 
 .bar-container {
+
+
+  @media only screen and (max-width: 800px) {
+    display: none;
+  }
+
   position: fixed;
   right: 48px;
   bottom: 48px;
@@ -101,3 +117,5 @@ body {
     will-change: transform;
   }
 }
+
+
