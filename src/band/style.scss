@@ -1,0 +1,67 @@
+@font-face {
+    font-family: Karrik;
+    src: url(karrik-regular.woff2);
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body
+{
+    font-family: Karrik;
+    font-size: 24px;
+    line-height: 0.9;
+    text-transform: uppercase;
+
+    color: #000000;
+}
+
+section {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-auto-flow: dense;
+
+    height: 100vh;
+    max-height: 1000px;
+}
+
+section:nth-child(odd) div.canvas-holder {
+    grid-column: 2;
+}
+
+div.canvas-holder {
+    background-color: black;
+    overflow: hidden;
+}
+
+.front, .dates, .tickets {
+    padding: 48px;
+}
+
+.front {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+h1 {
+    font-size: calc(24px + 6vw);
+}
+
+h1 {
+    font-size: calc(16px + 3vw);
+}
+
+.date {
+    display: flex;
+
+    p {
+        margin: 0.25em 0 0 0.5em;
+    }
+}

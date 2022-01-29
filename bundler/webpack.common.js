@@ -7,6 +7,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const pages = [
   "airplanes",
   "aviator",
+  "band",
   "bird",
   "breath",
   "camera",
