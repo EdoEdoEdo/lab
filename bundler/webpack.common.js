@@ -8,6 +8,7 @@ const pages = [
   "airplanes",
   "aviator",
   "band",
+  "blend",
   "bird",
   "breath",
   "camera",
