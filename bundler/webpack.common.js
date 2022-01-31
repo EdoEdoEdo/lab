@@ -24,6 +24,7 @@ const pages = [
   "lab",
   "loader",
   "ocean",
+  "photos",
   "scroll",
   "scrolltrigger",
   "template",
