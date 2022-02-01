@@ -2,12 +2,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const path = require("path"),
   HtmlWebpackPlugin = require("html-webpack-plugin");
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+// const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const pages = [
   "airplanes",
   "aviator",
   "band",
+  "barba1",
+  "barba2",
   "blend",
   "bird",
   "breath",
@@ -64,7 +66,7 @@ module.exports = {
       ]
     }),
     new MiniCSSExtractPlugin(),
-    new FaviconsWebpackPlugin('./static/favicon.ico')
+    // new FaviconsWebpackPlugin('./static/favicon.ico')
   ),
   module:
   {
