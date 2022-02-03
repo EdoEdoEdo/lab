@@ -28,6 +28,7 @@ const pages = [
   "loader",
   "ocean",
   "photos",
+  "portraits",
   "records",
   "scroll",
   "scrolltrigger",
