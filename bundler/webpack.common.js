@@ -5,6 +5,7 @@ const path = require("path"),
 // const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const pages = [
+  "album",
   "airplanes",
   "aviator",
   "band",
