@@ -1,6 +1,8 @@
 import './style.scss';
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
 import Stats from 'three/examples/jsm/libs/stats.module'
 import * as dat from 'dat.gui'
 import vertexShader from './shaders/vertex.glsl'
@@ -18,11 +20,11 @@ import creatureFrag from './shaders/creatureFrag.glsl'
  const smallWavesFolder = gui.addFolder("Small Waves");
  const colorFolder = gui.addFolder("Colors");
  const debugObject = {
-   waveDepthColor: "#361e4d",
-   waveSurfaceColor: "#994baa",
+   waveDepthColor: "#5D5779",
+   waveSurfaceColor: "#87627D",
    fogNear: 1,
    fogFar: 3,
-   fogColor: "#6bc7fc"
+   fogColor: "#C5707B"
  };
 
  /**
@@ -39,6 +41,40 @@ import creatureFrag from './shaders/creatureFrag.glsl'
    debugObject.fogFar
  );
  scene.background = new THREE.Color(debugObject.fogColor);
+
+ const hemisphereLight = new THREE.HemisphereLight(0xaaaaaa,0x000000, .9)
+ hemisphereLight.position.set(0, 0, 5);
+//  const shadowLight = new THREE.DirectionalLight(0xffffff, .9);
+//  shadowLight.position.set(150, 350, 350);
+//  shadowLight.castShadow = true;
+//  shadowLight.shadow.camera.left = -400;
+//  shadowLight.shadow.camera.right = 400;
+//  shadowLight.shadow.camera.top = 400;
+//  shadowLight.shadow.camera.bottom = -400;
+//  shadowLight.shadow.camera.near = 1;
+//  shadowLight.shadow.camera.far = 1000;
+//  shadowLight.shadow.mapSize.width = 2048;
+//  shadowLight.shadow.mapSize.height = 2048;
+
+//  const helper = new THREE.HemisphereLightHelper( hemisphereLight, 5 );
+//  scene.add( helper );
+ scene.add(hemisphereLight);
+
+//  scene.add(shadowLight);
+
+ const light = new THREE.AmbientLight( 0xffffff, 1.5 ); // soft white light
+ scene.add( light );
+
+ // SpotLight
+// =================
+// let spotLight = new THREE.SpotLight( 0xcccccc, 0.6 );
+// spotLight.position.set( 0, 1, 0 );
+// scene.add( spotLight );
+// scene.add( spotLight.target ); // add target to the scene
+
+// // SpotLight Helper
+// const cameraHelper = new THREE.CameraHelper(spotLight.shadow.camera);
+// scene.add(cameraHelper);
 
 //  const axis = new THREE.AxesHelper(40)
 //  scene.add(axis)
@@ -57,9 +93,9 @@ import creatureFrag from './shaders/creatureFrag.glsl'
    uniforms: {
      uTime: { value: 0 },
      uMouse: { value: new THREE.Vector2() },
-     uBigWavesElevation: { value: 0.2 },
+     uBigWavesElevation: { value: 0.245 },
      uBigWavesFrequency: { value: new THREE.Vector2(4, 2) },
-     uBigWaveSpeed: { value: 0.75 },
+     uBigWaveSpeed: { value: 3.5 },
      // Small Waves
      uSmallWavesElevation: { value: 0.15 },
      uSmallWavesFrequency: { value: 3 },
@@ -80,39 +116,57 @@ import creatureFrag from './shaders/creatureFrag.glsl'
  water.rotation.x = -Math.PI * 0.5;
  scene.add(water);
 
-
 /**
-* Creature
+* Cans
 */
-const clock = new THREE.Clock()
-const loader = new THREE.TextureLoader()
-const cubeLoader = new THREE.CubeTextureLoader()
+const loader = new GLTFLoader();
+loader.load( 'models/cans/scene.gltf', function ( gltf ) {
 
-const uniforms = {
-  time: { value: clock.getElapsedTime() },
-  cat: { value: loader.load("/textures/album/cat.jpg") },
-  cube: { value: cubeLoader.load(["/textures/album/posx.jpg", "/textures/album/negx.jpg", "/textures/album/posy.jpg", "/textures/album/negy.jpg", "/textures/album/posz.jpg", "/textures/album/negz.jpg"]) }
-}
+  console.log('loaded', gltf);
+  gltf.scene.position.set(0, 0.6, 5);
+  gltf.scene.scale.set(0.01, 0.01, 0.01);
 
-const dpi = 12
-const geometry = new THREE.SphereGeometry(1, dpi, dpi)
-// const geometry = new THREE.ConeGeometry( 1, 1, 32 );
-// const geometry = new THREE.TorusGeometry( 2, 1, 16, 100 );
-// const geometry = new THREE.TorusKnotGeometry( 5, 1, 80, 50 );
-// const geometry = new THREE.TorusKnotGeometry(5, 1, 10 * dpi, dpi, 5, 9)
-// const geometry = new THREE.TorusKnotGeometry(0.05, 0.4, 100, 16)
-// const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
+  scene.add( gltf.scene );
 
-const material = new THREE.ShaderMaterial({
-  uniforms: uniforms,
-  vertexShader: creatureVert,
-  fragmentShader: creatureFrag,
-  wireframe: true
-})
-const shape = new THREE.Mesh(geometry, material)
-shape.position.y = 1;
-shape.position.z = 1;
-scene.add(shape)
+}, undefined, function ( error ) {
+
+  console.error( error );
+
+} );
+
+
+// /**
+// * Creature
+// */
+// const clock = new THREE.Clock()
+// const loader = new THREE.TextureLoader()
+// const cubeLoader = new THREE.CubeTextureLoader()
+
+// const uniforms = {
+//   time: { value: clock.getElapsedTime() },
+//   cat: { value: loader.load("/textures/album/cat.jpg") },
+//   cube: { value: cubeLoader.load(["/textures/album/posx.jpg", "/textures/album/negx.jpg", "/textures/album/posy.jpg", "/textures/album/negy.jpg", "/textures/album/posz.jpg", "/textures/album/negz.jpg"]) }
+// }
+
+// const dpi = 12
+// const geometry = new THREE.SphereGeometry(1, dpi, dpi)
+// // const geometry = new THREE.ConeGeometry( 1, 1, 32 );
+// // const geometry = new THREE.TorusGeometry( 2, 1, 16, 100 );
+// // const geometry = new THREE.TorusKnotGeometry( 5, 1, 80, 50 );
+// // const geometry = new THREE.TorusKnotGeometry(5, 1, 10 * dpi, dpi, 5, 9)
+// // const geometry = new THREE.TorusKnotGeometry(0.05, 0.4, 100, 16)
+// // const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
+
+// const material = new THREE.ShaderMaterial({
+//   uniforms: uniforms,
+//   vertexShader: creatureVert,
+//   fragmentShader: creatureFrag,
+//   wireframe: true
+// })
+// const shape = new THREE.Mesh(geometry, material)
+// shape.position.y = 1;
+// shape.position.z = 1;
+// scene.add(shape)
 
 
 
@@ -155,6 +209,9 @@ scene.add(shape)
  // Controls
 //  const controls = new OrbitControls(camera, canvas);
 //  controls.enableDamping = true;
+//  controls.dampingFactor = 0.05;
+// controls.maxPolarAngle = Math.PI * 0.435;
+// controls.minPolarAngle = Math.PI * 0.435;
 
  /**
   * Renderer
@@ -263,7 +320,7 @@ scene.add(shape)
  /**
   * Animate
   */
-//  const clock = new THREE.Clock();
+ const clock = new THREE.Clock();
 
  const tick = () => {
    const elapsedTime = clock.getElapsedTime();
@@ -271,13 +328,13 @@ scene.add(shape)
    // Update controls
   //  controls.update();
 
-  // update uniforms
-  uniforms.time = { value: clock.getElapsedTime() }
+  // // update uniforms
+  // uniforms.time = { value: clock.getElapsedTime() }
 
    // Update time
    waterMaterial.uniforms.uTime.value = elapsedTime;
 
-  shape.rotation.y += 0.01;
+  // shape.rotation.y += 0.01;
 
    // Render
    renderer.render(scene, camera);
