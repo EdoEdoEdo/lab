@@ -31,6 +31,7 @@ const pages = [
   "photos",
   "portraits",
   "records",
+  "seacreatures",
   "scroll",
   "scrolltrigger",
   "template",
