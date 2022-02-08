@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&display=swap');
 
 *
 {
@@ -9,7 +9,10 @@
 html,
 body
 {
+    font-family: 'Open Sans Condensed', sans-serif;
     background-color:  white;
+    color: white;
+    letter-spacing: 1.5px;
     overflow: hidden;
 }
 
@@ -19,4 +22,109 @@ body
     top: 0;
     left: 0;
     outline: none;
+}
+
+
+footer {
+    display: flex;
+    justify-content: space-between;
+
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+
+    img {
+        padding: 0 48px 48px 48px;
+        height: 100px;
+
+        &.two {
+            transform: rotate(-60deg);
+        }
+    }
+
+    .copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        .up {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .down {
+            color: #2b2d42;
+        }
+    }
+}
+
+
+header {
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    padding-top: 24px;
+
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        width: 50%;
+        padding-top: 24px;
+        text-transform: uppercase;
+        transform: translate(50%);
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+
+        ul {
+            padding-left: 48px;
+            li {
+
+                &:nth-child(1) {
+                    font-weight: 700;
+                }
+                &:nth-child(4) {
+                    color: #5D5779;
+                }
+
+                display: inline-block;
+                margin-right: 30px;
+
+                &:hover {
+                    color: #5D5779;
+                }
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+        }
+
+        .cta {
+            button {
+                background-color: #FF13A7;
+                color: white;
+                border: none;
+                padding: 16px 48px;
+                font-size: 16px;
+                font-weight: 700;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                margin-right: 48px;
+
+                &:hover {
+                    background-color: #FFBC44;
+                }
+            }
+        }
+    }
 }
