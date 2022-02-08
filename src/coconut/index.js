@@ -42,43 +42,6 @@ import creatureFrag from './shaders/creatureFrag.glsl'
  );
  scene.background = new THREE.Color(debugObject.fogColor);
 
- const hemisphereLight = new THREE.HemisphereLight(0xaaaaaa,0x000000, .9)
- hemisphereLight.position.set(0, 0, 5);
-//  const shadowLight = new THREE.DirectionalLight(0xffffff, .9);
-//  shadowLight.position.set(150, 350, 350);
-//  shadowLight.castShadow = true;
-//  shadowLight.shadow.camera.left = -400;
-//  shadowLight.shadow.camera.right = 400;
-//  shadowLight.shadow.camera.top = 400;
-//  shadowLight.shadow.camera.bottom = -400;
-//  shadowLight.shadow.camera.near = 1;
-//  shadowLight.shadow.camera.far = 1000;
-//  shadowLight.shadow.mapSize.width = 2048;
-//  shadowLight.shadow.mapSize.height = 2048;
-
-//  const helper = new THREE.HemisphereLightHelper( hemisphereLight, 5 );
-//  scene.add( helper );
- scene.add(hemisphereLight);
-
-//  scene.add(shadowLight);
-
- const light = new THREE.AmbientLight( 0xffffff, 1.5 ); // soft white light
- scene.add( light );
-
- // SpotLight
-// =================
-// let spotLight = new THREE.SpotLight( 0xcccccc, 0.6 );
-// spotLight.position.set( 0, 1, 0 );
-// scene.add( spotLight );
-// scene.add( spotLight.target ); // add target to the scene
-
-// // SpotLight Helper
-// const cameraHelper = new THREE.CameraHelper(spotLight.shadow.camera);
-// scene.add(cameraHelper);
-
-//  const axis = new THREE.AxesHelper(40)
-//  scene.add(axis)
-
  /**
   * Object
   */
@@ -119,6 +82,7 @@ import creatureFrag from './shaders/creatureFrag.glsl'
 /**
 * Cans
 */
+const canScene = new THREE.Scene();
 let can;
 const loader = new GLTFLoader();
 loader.load( 'models/coconut/scene.gltf', function ( gltf ) {
@@ -127,11 +91,11 @@ loader.load( 'models/coconut/scene.gltf', function ( gltf ) {
   gltf.scene.scale.set(0.013, 0.013, 0.013);
   gltf.scene.rotateY(Math.PI*2.55);
   can = gltf.scene;
-  scene.add( can );
+  canScene.add( can );
 
   var canBox = new THREE.Box3().setFromObject( can );
- canBox.getCenter( controls.target );
- controls.update();
+  canBox.getCenter( controls.target );
+  controls.update();
 
 
 }, undefined, function ( error ) {
@@ -140,40 +104,12 @@ loader.load( 'models/coconut/scene.gltf', function ( gltf ) {
 
 } );
 
-
-// /**
-// * Creature
-// */
-// const clock = new THREE.Clock()
-// const loader = new THREE.TextureLoader()
-// const cubeLoader = new THREE.CubeTextureLoader()
-
-// const uniforms = {
-//   time: { value: clock.getElapsedTime() },
-//   cat: { value: loader.load("/textures/album/cat.jpg") },
-//   cube: { value: cubeLoader.load(["/textures/album/posx.jpg", "/textures/album/negx.jpg", "/textures/album/posy.jpg", "/textures/album/negy.jpg", "/textures/album/posz.jpg", "/textures/album/negz.jpg"]) }
-// }
-
-// const dpi = 12
-// const geometry = new THREE.SphereGeometry(1, dpi, dpi)
-// // const geometry = new THREE.ConeGeometry( 1, 1, 32 );
-// // const geometry = new THREE.TorusGeometry( 2, 1, 16, 100 );
-// // const geometry = new THREE.TorusKnotGeometry( 5, 1, 80, 50 );
-// // const geometry = new THREE.TorusKnotGeometry(5, 1, 10 * dpi, dpi, 5, 9)
-// // const geometry = new THREE.TorusKnotGeometry(0.05, 0.4, 100, 16)
-// // const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
-
-// const material = new THREE.ShaderMaterial({
-//   uniforms: uniforms,
-//   vertexShader: creatureVert,
-//   fragmentShader: creatureFrag,
-//   wireframe: true
-// })
-// const shape = new THREE.Mesh(geometry, material)
-// shape.position.y = 1;
-// shape.position.z = 1;
-// scene.add(shape)
-
+/**
+* Lights
+*/
+const light = new THREE.AmbientLight( 0xffffff, 1.5 );
+scene.add( light );
+canScene.add(light);
 
 
  /**
@@ -189,9 +125,13 @@ loader.load( 'models/coconut/scene.gltf', function ( gltf ) {
    sizes.width = window.innerWidth;
    sizes.height = window.innerHeight;
 
-   // Update camera
+   // Update camera 1
    camera.aspect = sizes.width / sizes.height;
    camera.updateProjectionMatrix();
+
+   // Update camera 2
+   camera2.aspect = sizes.width / sizes.height;
+   camera2.updateProjectionMatrix();
 
    // Update renderer
    renderer.setSize(sizes.width, sizes.height);
@@ -211,6 +151,14 @@ loader.load( 'models/coconut/scene.gltf', function ( gltf ) {
  );
  camera.position.set(0, 1, 6);
  scene.add(camera);
+ const camera2 = new THREE.PerspectiveCamera(
+  75,
+  sizes.width / sizes.height,
+  0.1,
+  1000
+);
+camera2.position.set(0, 1, 6);
+ canScene.add(camera2);
 
  /**
   * Renderer
@@ -317,13 +265,16 @@ loader.load( 'models/coconut/scene.gltf', function ( gltf ) {
    });
 
  // Controls
- const controls = new OrbitControls(camera, canvas);
+ const controls = new OrbitControls(camera2, canvas);
  controls.enableDamping = true;
+ controls.enableZoom = false;
+ controls.enablePan = false;
 
  /**
   * Animate
   */
  const clock = new THREE.Clock();
+ renderer.autoClear = false; // important!
 
  const tick = () => {
    const elapsedTime = clock.getElapsedTime();
@@ -341,6 +292,7 @@ loader.load( 'models/coconut/scene.gltf', function ( gltf ) {
 
    // Render
    renderer.render(scene, camera);
+   renderer.render(canScene, camera2);
 
    // Call tick again on the next frame
    window.requestAnimationFrame(tick);
