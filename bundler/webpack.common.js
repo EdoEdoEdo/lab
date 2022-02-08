@@ -15,6 +15,7 @@ const pages = [
   "bird",
   "breath",
   "camera",
+  "coconut",
   "fbm",
   "flag",
   "fireflies",
