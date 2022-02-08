@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap');
+
 *
 {
     margin: 0;
@@ -7,7 +9,8 @@
 html,
 body
 {
-    overflow: hidden;
+    font-family: 'Jura', sans-serif;
+    background: black;
 }
 
 .webgl
@@ -16,4 +19,61 @@ body
     top: 0;
     left: 0;
     outline: none;
+}
+
+
+main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    width: 100%;
+    display: grid;
+    /* Define Auto Row size */
+    grid-auto-rows: 300px;
+    /*Define our columns */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 1em;
+  }
+
+  article {
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
+    iframe {
+        pointer-events: none;
+        // height: 50%;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    &:hover {
+        background-color: red;
+        opacity: 0.5;
+    }
+  }
+
+
+//   article:nth-child(odd) {
+//     background-color: #55BBE9;
+//   }
+
+//   article:nth-child(even) {
+//     background-color: #afbe29;
+//   }
+
+
+
+header {
+    padding-top: 80px;
+    text-align: center;
+    width: 100%;
+    color: white;
 }

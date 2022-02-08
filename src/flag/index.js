@@ -127,3 +127,5 @@ const tick = () =>
 }
 
 tick()
+
+dat.GUI.toggleHide();
