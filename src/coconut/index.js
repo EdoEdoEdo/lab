@@ -90,6 +90,13 @@ loader.load( 'models/coconut/scene.gltf', function ( gltf ) {
   gltf.scene.position.set(0, 1, 4);
   gltf.scene.scale.set(0.013, 0.013, 0.013);
   gltf.scene.rotateY(Math.PI*2.55);
+
+  gltf.parser.getDependencies( 'material' ).then( ( materials ) => {
+    materials.forEach( ( material ) => {
+      material.metalness = 1;
+    });
+  } );
+
   can = gltf.scene;
   canScene.add( can );
 
