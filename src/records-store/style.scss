@@ -20,7 +20,7 @@ body
     font-family: Apfel Grotezk;
     font-size: calc(16px + 0.5vw);
     line-height: 1.25;
-    // overflow: hidden;
+    overscroll-behavior: none;
     background-color: #FFE7D6;
     color: #58585d;
 }
