@@ -32,6 +32,7 @@ const pages = [
   "photos",
   "portraits",
   "records",
+  "records_label",
   "seacreatures",
   "scroll",
   "scrolltrigger",
