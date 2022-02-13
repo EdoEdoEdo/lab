@@ -21,8 +21,9 @@ body
     font-size: calc(16px + 0.5vw);
     line-height: 1.25;
     overscroll-behavior: none;
-    background-color: #FFE7D6;
-    color: #58585d;
+    overflow: hidden;
+    background-color: black;
+    color: #f2f2f2;
 }
 
 div.canvas-holder{
@@ -35,8 +36,7 @@ div.canvas-holder{
     transform: translateY(70%);
 }
 
-div.canvas-holder canvas,
-.container{
+div.canvas-holder canvas {
     margin: 0 auto;
     max-width: 1200px;
     max-height: 1200px;
@@ -46,12 +46,12 @@ div.canvas-holder canvas,
 
 button
 {
-    font-family: Halibut;
-    font-size: calc(12px + 0.5vw);
+    font-family: Apfel Grotezk;
+    font-size: 14px;
     line-height: 1.25;
     border-radius: 50px;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: rebeccapurple;
+    color: #f2f2f2;
     padding: 10px 20px ;
     cursor: pointer;
     border: none;
@@ -86,6 +86,10 @@ section {
     h1 {
         font-size: calc(64px + 0.5vw);
         line-height: 1.1;
+
+        span {
+            color: rebeccapurple;
+        }
     }
 
     p {
@@ -115,4 +119,10 @@ section {
             font-size: 18px;
         }
     }
+}
+
+.container {
+    position: fixed;
+    z-index: 9;
+    top: 50px;
 }
