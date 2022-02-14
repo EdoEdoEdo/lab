@@ -29,6 +29,7 @@ const pages = [
   "lab",
   "loader",
   "ocean",
+  "ogl",
   "photos",
   "portraits",
   "records",

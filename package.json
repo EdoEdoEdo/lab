@@ -25,6 +25,7 @@
     "imagesloaded": "^4.1.4",
     "lil-gui": "^0.16.0",
     "mini-css-extract-plugin": "^2.0.0",
+    "ogl": "^0.0.86",
     "portfinder-sync": "0.0.2",
     "postprocessing": "^6.23.3",
     "raw-loader": "^4.0.2",
