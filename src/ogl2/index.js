@@ -1,6 +1,6 @@
 import { Renderer, Color, Camera, Transform, Program, Mesh, Orbit, Geometry , Text} from 'ogl';
 import font from './fonts/radikal-bold.json'
-import srcPNG from './fonts/radikal-bold.png'
+// import srcPNG from './fonts/radikal-bold.png'
 
 const vertex = /* glsl */ `#version 300 es
 

@@ -231,8 +231,6 @@ class CreateObj {
       noises_edge.setX(i, noiseValue);
     }
 
-    console.log(this.shapeInstanceG);
-
     this.shapeInstanceG.addAttribute("aNoise", noises);
     this.shapeInstanceG.addAttribute("aAudio", audioSpectrums);
 
@@ -315,15 +313,16 @@ class CreateObj {
       "float noise = abs(vNoise);", // 0.0 ~ 1.0
 
       "vec3 _color;",
-      "if(noise < 0.3){",
-      "_color = uColor;",
-      "} else if(noise < 0.6){",
-      "_color = vec3(uColor.z, uColor.x, uColor.y);",
-      "} else {",
-      "_color = vec3(uColor.x, uColor.z, uColor.y);",
-      "}",
+      "_color = vec3(uColor.x, uColor.y, uColor.z);",
+      // "if(noise < 0.3){",
+      // "_color = uColor;",
+      // "} else if(noise < 0.6){",
+      // "_color = vec3(uColor.z, uColor.x, uColor.y);",
+      // "} else {",
+      // "_color = vec3(uColor.x, uColor.z, uColor.y);",
+      // "}",
 
-      "_color += noise * 0.8;",
+      // "_color += noise * 0.8;",
 
       "float posColor = (vTranslation.x * (1.0 + noise) + vTranslation.z * (1.0 + noise) + WIDTH) * 0.3 / (2.0 * WIDTH);",
       "posColor = min(0.7 * 0.3, posColor);",
@@ -333,11 +332,11 @@ class CreateObj {
       "float sinY = (sin(time ) + 1.0) / 3.0 * RATIO;",
       "float sinZ = (sin(time - R120) + 1.0) / 3.0 * RATIO;",
 
-      "_color.r += noise * 0.7 + posColor;",
-      "_color.b -= vNoise * 0.4 + posColor * 2.0;",
-      "_color.g -= vNoise * 0.3 + posColor * 2.0;",
+      // "_color.r += noise * 0.7 + posColor;",
+      // "_color.b -= vNoise * 0.4 + posColor * 2.0;",
+      // "_color.g -= vNoise * 0.3 + posColor * 2.0;",
 
-      "_color += vec3(sinX, sinY, sinZ);",
+      // "_color += vec3(sinX, sinY, sinZ);",
 
       "gl_FragColor = vec4(_color, 1.0);",
       "}"
@@ -480,9 +479,10 @@ class Audio {
     this.analyser.maxDecibels = 20;
     this.analyser.smoothingTimeConstant = .94;
 
-    document.getElementById('file').addEventListener('change', function(e) {
-      this.fileReader.readAsArrayBuffer(e.target.files[0]);
-      console.log(e.target.files[0])
+    document.querySelector('.play').addEventListener('click', function(e) {
+      fetch('./kalimba.mp3')
+        .then(resp => resp.blob())
+        .then(blob => this.fileReader.readAsArrayBuffer(blob));
     }.bind(this));
 
     var _this = this;
@@ -572,31 +572,32 @@ class ColorCtrls {
       resetColor: false
     };
 
-    this.gui = new dat.GUI();
+    // this.gui = new dat.GUI();
 
-    this.gui.add(params, "quality", ["high", "middle", "low"]).onFinishChange(function(value) {
-      var pixelRatio = (value === "high") ? 2 : (value === "low") ? 1 : 1.5;
-      webgl.renderer.setPixelRatio(pixelRatio);
-    });
+    // this.gui.add(params, "quality", ["high", "middle", "low"]).onFinishChange(function(value) {
+    //   var pixelRatio = (value === "high") ? 2 : (value === "low") ? 1 : 1.5;
+    //   webgl.renderer.setPixelRatio(pixelRatio);
+    // });
 
-    this.gui.addColor(params, "bgColor").onFinishChange(function(value) {
-      webgl.renderer.setClearColor(value);
-    });
+    // this.gui.addColor(params, "bgColor").onFinishChange(function(value) {
+    //   webgl.renderer.setClearColor(value);
+    // });
 
-    this.gui.close();
+    // this.gui.close();
 
-    this.gui.addColor(params, "basicColor").onFinishChange(function(value) {
-      obj.basicColor.value = new THREE.Color(value);
-    });
-    this.gui.addColor(params, "edgeColor").onFinishChange(function(value) {
-      obj.edgeColor.value = new THREE.Color(value);
-    });
+    // this.gui.addColor(params, "basicColor").onFinishChange(function(value) {
+    //   obj.basicColor.value = new THREE.Color(value);
+    // });
+    // this.gui.addColor(params, "edgeColor").onFinishChange(function(value) {
+    //   obj.edgeColor.value = new THREE.Color(value);
+    // });
 
-    this.gui.add(params, "resetColor").onFinishChange(function(value) {
-      if (!value) return;
-      webgl.renderer.setClearColor(props1.clearColor);
-      obj.edgeColor.value = new THREE.Color(props2.edgeColor);
-    });
+    // this.gui.add(params, "resetColor").onFinishChange(function(value) {
+    //   if (!value) return;
+    //   webgl.renderer.setClearColor(props1.clearColor);
+    //   obj.edgeColor.value = new THREE.Color(props2.edgeColor);
+    // });
+
   }
 }
 
@@ -620,8 +621,8 @@ window.onload = function() {
     z: 12,
     y: 12,
     density: 45,
-    basicColor: 0x653399,
-    edgeColor: 0x653399 // 0xaa2391
+    basicColor: 0x772d8b,
+    edgeColor: 0xffffff // 0xaa2391
   }
 
   objProps.width = (objProps.x + objProps.density * 2) * 12;
@@ -640,3 +641,4 @@ window.onload = function() {
 
   var gui = new ColorCtrls(webglProps, objProps, webgl, obj);
 };
+

@@ -52,7 +52,7 @@ button
     font-size: 14px;
     line-height: 1.25;
     border-radius: 50px;
-    background-color: yellow;
+    background-color: black;
     color: #f2f2f2;
     padding: 10px 20px ;
     cursor: pointer;
@@ -72,59 +72,57 @@ button
     }
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    margin: 48px 0;
-    font-size: 14px;
-}
 
-section {
-    height: 100vh;
-}
-
-.main {
-
-    h1 {
-        font-size: calc(64px + 0.5vw);
-        line-height: 1.1;
-
-        span {
-            color: yellow;
-        }
-    }
-
-    p {
-        font-size: calc(12px + 0.5vw);
-        line-height: 1.25;
-        margin-bottom: 40px;
-
-        :nth-child(1) {
-            font-weight: 800;
-        }
-    }
-
-    .left {
-        max-width: 60%;
-    }
-
-    display: flex;
-    justify-content: space-between;
-
-    ul {
-        margin-top: 60px;
-        text-align: right;
-        list-style: none;
-
-        li {
-            cursor: pointer;
-            font-size: 18px;
-        }
-    }
-}
 
 .container {
-    position: fixed;
+    position: absolute;
     z-index: 9;
-    top: 50px;
+    text-align: center;
+    bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
+    header {
+        font-size: 14px;
+    }
+
+    .main {
+
+        h1 {
+            font-size: calc(64px + 0.5vw);
+            line-height: 1.1;
+            // -webkit-text-stroke: 0.1px white;
+
+
+            span {
+                color: #772d8b;
+            }
+        }
+
+        text-align: center;
+        p {
+            font-size: calc(12px + 0.5vw);
+            line-height: 1.25;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+
+            :nth-child(1) {
+                font-weight: 800;
+            }
+        }
+
+    }
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 6px;
+    position: fixed;
+    width: 100%;
 }
