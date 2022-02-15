@@ -34,9 +34,11 @@ div.canvas-holder{
     align-items: center;
     justify-content: center;
     transform: translateY(70%);
+    background: transparent;
 }
 
 div.canvas-holder canvas {
+    background: transparent;
     margin: 0 auto;
     max-width: 1200px;
     max-height: 1200px;
@@ -50,7 +52,7 @@ button
     font-size: 14px;
     line-height: 1.25;
     border-radius: 50px;
-    background-color: rebeccapurple;
+    background-color: yellow;
     color: #f2f2f2;
     padding: 10px 20px ;
     cursor: pointer;
@@ -88,7 +90,7 @@ section {
         line-height: 1.1;
 
         span {
-            color: rebeccapurple;
+            color: yellow;
         }
     }
 

@@ -36,10 +36,7 @@ void main(void)
 {
   vec2 uv = -1.0 + 2.0 * v_texcoord;
 
-
-  vec4 background = vec4(0.0, 0.0, 0.0, 1.0);
-
-
+  vec4 background = vec4(1.0, 1.0, 0.0, 0.0);
 
   int lowerIndex  = int(floor(scroll));
   int upperIndex  = int(ceil(scroll));
