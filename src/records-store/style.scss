@@ -12,6 +12,7 @@
 {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html,
@@ -53,11 +54,16 @@ button
     line-height: 1.25;
     border-radius: 50px;
     background-color: black;
-    color: #f2f2f2;
+    color: #F9DB6D;
     padding: 10px 20px ;
     cursor: pointer;
     border: none;
     text-transform: uppercase;
+
+    &:hover{
+        background-color: #F9DB6D;
+        color: black;
+    }
 }
 
 .needle {
@@ -65,7 +71,9 @@ button
     top: 0;
     right: 0;
 
-
+    transform: rotate(73deg);
+    
+    transform-origin: 65% 25%;
 
     img {
         width: 400px;
@@ -78,7 +86,7 @@ button
     position: absolute;
     z-index: 9;
     text-align: center;
-    bottom: 50px;
+    bottom: 175px;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
@@ -88,6 +96,12 @@ button
     }
 
     .main {
+        text-align: center;
+        background: rgba(119, 45, 139, 0.5);
+        width: 70%;
+        border-radius: 50% 20% / 10% 40%;
+        margin: 0 auto;
+        padding: 40px 0;
 
         h1 {
             font-size: calc(64px + 0.5vw);
@@ -96,14 +110,14 @@ button
 
 
             span {
-                color: #772d8b;
+                color: #F9DB6D;
             }
         }
 
         text-align: center;
         p {
             font-size: calc(12px + 0.5vw);
-            line-height: 1.25;
+            line-height: 1.5;
             margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
@@ -125,4 +139,49 @@ header {
     font-size: 6px;
     position: fixed;
     width: 100%;
+}
+
+footer {
+    position: fixed;
+    z-index: 10;
+    background-color: #000000;
+    top: 0;
+    width: 100%;
+    font-size: 14px;
+    padding: 20px;
+    border-bottom: 1px solid #772d8b;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white));
+
+    display: flex;
+    justify-content: space-between;
+
+    .links {
+        display: flex;
+        p {
+            padding-left: 10px;
+            cursor: pointer;
+            &:hover {
+                color: #F9DB6D;
+            }
+        }
+    }
+}
+
+.more-info {
+    position: absolute;
+    width: 200px;
+    z-index: 99;
+    bottom: 50px;
+    left: 20px;
+    transform: translateX(-200px);
+    opacity: 0;
+    button{
+        background-color: #F9DB6D;
+        color: #000;
+
+        &:hover{
+            background-color: #000;
+            color: #F9DB6D;
+        }
+    }
 }

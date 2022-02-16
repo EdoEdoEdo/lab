@@ -4,6 +4,7 @@ import './pumps.scss';
 import './pumps.js';
 import { frag } from './frag.js';
 import GlslCanvas from 'glslCanvas';
+import { gsap } from 'gsap';
 
 
 const canvas = document.querySelector('canvas');
@@ -53,3 +54,23 @@ window.addEventListener('scroll', function () {
 
   sandbox.setUniform('scroll',  pixels / wh);
 });
+
+document.querySelector('.play').addEventListener('click', function () {
+
+  gsap.to('.needle', {rotate: 10, duration: 2, ease: 'power2.inOut'})
+  gsap.to('.container', {opacity:0, duration:1, delay:1})
+  gsap.to('.more-info', {opacity:1, duration:1, delay:1, x:100})
+  sandbox.setUniform("midColors",
+                   [0.619, 0.01, 0.839, 1.0],
+                   [1.000, 0.245, 0.226, 1.0],
+                   [0.071, 0.557, 0.300, 1.0],
+                  )
+  sandbox.setUniform("innerColors",
+                  [0.619, 0.45, 0.001, 1.0],
+                  [1.000, 0.245, 0.226, 1.0],
+                  [0.071, 0.557, 0.300, 1.0],
+                 )
+})
+
+
+

@@ -314,15 +314,15 @@ class CreateObj {
 
       "vec3 _color;",
       "_color = vec3(uColor.x, uColor.y, uColor.z);",
-      // "if(noise < 0.3){",
-      // "_color = uColor;",
-      // "} else if(noise < 0.6){",
-      // "_color = vec3(uColor.z, uColor.x, uColor.y);",
-      // "} else {",
-      // "_color = vec3(uColor.x, uColor.z, uColor.y);",
-      // "}",
+      "if(noise < 0.3){",
+      "_color = uColor;",
+      "} else if(noise < 0.6){",
+      "_color = vec3(uColor.z, uColor.x, uColor.y);",
+      "} else {",
+      "_color = vec3(uColor.x, uColor.z, uColor.y);",
+      "}",
 
-      // "_color += noise * 0.8;",
+      "_color += noise * 0.8;",
 
       "float posColor = (vTranslation.x * (1.0 + noise) + vTranslation.z * (1.0 + noise) + WIDTH) * 0.3 / (2.0 * WIDTH);",
       "posColor = min(0.7 * 0.3, posColor);",
@@ -332,11 +332,11 @@ class CreateObj {
       "float sinY = (sin(time ) + 1.0) / 3.0 * RATIO;",
       "float sinZ = (sin(time - R120) + 1.0) / 3.0 * RATIO;",
 
-      // "_color.r += noise * 0.7 + posColor;",
-      // "_color.b -= vNoise * 0.4 + posColor * 2.0;",
-      // "_color.g -= vNoise * 0.3 + posColor * 2.0;",
+      "_color.r += noise * 0.7 + posColor;",
+      "_color.b -= vNoise * 0.4 + posColor * 2.0;",
+      "_color.g -= vNoise * 0.3 + posColor * 2.0;",
 
-      // "_color += vec3(sinX, sinY, sinZ);",
+      "_color += vec3(sinX, sinY, sinZ);",
 
       "gl_FragColor = vec4(_color, 1.0);",
       "}"
@@ -621,8 +621,8 @@ window.onload = function() {
     z: 12,
     y: 12,
     density: 45,
-    basicColor: 0x772d8b,
-    edgeColor: 0xffffff // 0xaa2391
+    basicColor: 0xF9DB6D,
+    edgeColor: 0xF4EDED // 0xaa2391
   }
 
   objProps.width = (objProps.x + objProps.density * 2) * 12;
