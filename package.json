@@ -39,6 +39,7 @@
     "webpack-merge": "^5.8.0"
   },
   "devDependencies": {
+    "auto-bind": "^5.0.1",
     "favicons": "^6.2.2",
     "favicons-webpack-plugin": "^5.0.2",
     "sass": "^1.44.0",

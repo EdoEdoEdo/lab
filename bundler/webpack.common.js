@@ -16,6 +16,7 @@ const pages = [
   "breath",
   "camera",
   "coconut",
+  "fake3d",
   "fbm",
   "flag",
   "fireflies",
