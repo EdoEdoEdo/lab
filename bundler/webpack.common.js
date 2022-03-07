@@ -37,6 +37,7 @@ const pages = [
   "photos",
   "portraits",
   "portal",
+  "rafa",
   "records",
   "records-store",
   "seacreatures",
