@@ -14,6 +14,7 @@ const pages = [
   "blend",
   "bird",
   "breath",
+  "box",
   "camera",
   "coconut",
   "donuts",
