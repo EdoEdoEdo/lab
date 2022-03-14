@@ -135,6 +135,9 @@ const firefliesMaterial = new THREE.ShaderMaterial({
 const fireflies = new THREE.Points(firefliesGeometry, firefliesMaterial)
 scene.add(fireflies)
 
+// ADDING BACKGROUND AND FOG
+scene.fog = new THREE.FogExp2( 0xefd1b5, 0.0025 );
+
 /**
  * Sizes
  */

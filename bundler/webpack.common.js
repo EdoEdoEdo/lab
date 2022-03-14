@@ -45,6 +45,8 @@ const pages = [
   "toggle-actions",
   "untitled",
   "xmas",
+  "workers1",
+  "workers2",
 ];
 
 module.exports = {
