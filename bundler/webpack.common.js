@@ -49,6 +49,7 @@ const pages = [
   "xmas",
   "workers1",
   "workers2",
+  "workers3",
 ];
 
 module.exports = {
