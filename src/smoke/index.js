@@ -24,7 +24,6 @@ class Scene {
     // this.createTexture()
     // this.createMask()
     this.createTitles()
-    this.createBounds()
     this.createMesh()
 
     this.updateRatio()
@@ -78,6 +77,7 @@ class Scene {
 
   createTitles() {
     this.element = document.querySelector('.smoke')
+    this.createBounds()
   }
 
   // createMask () {
@@ -116,7 +116,7 @@ class Scene {
       uniforms: {
         uAlpha: { value: 1 },
         tMap: { value: this.textureDesktop },
-        tMask: { value: this.textureMask },
+        tMask: { value: this.textureMask.image },
         uResolution: { value: [0, 0, 0, 0] },
         uSpeed: { value: 0 }
       },
@@ -212,6 +212,7 @@ class Scene {
   update () {
 
     this.textureMask.updateVideo()
+    console.log(this.textureMask.image)
 
     this.renderer.render({
       scene: this.group,
