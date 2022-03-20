@@ -1,0 +1,40 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body
+{
+    overflow: hidden;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+.canvas {
+    left: 0;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    z-index: z('canvas');
+  }
+
+  .container {
+      display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+  }
+
+  .smoke {
+    font-size: 0;
+    height: 100vh;
+    width: 100vw;
+  }
