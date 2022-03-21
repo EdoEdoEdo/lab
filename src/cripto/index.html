@@ -16,12 +16,40 @@
     </section>
 
     <form>
-      Updatable things
+      <div>
+        <label>Roundness</label>
+        <input name="roundness" type="range" min="0" max="1" step="0.01" value="0.5">
+      </div>
+
+      <div>
+        <label>Roughness</label>
+        <input name="roughness" type="range" min="0" max="0.3" step="0.01" value="0.1">
+      </div>
+
+      <div>
+        <label>Light strength</label>
+        <input name="lightStrength" type="range" min="0" max="1" step="0.01" value="0.9">
+      </div>
+
+      <div>
+        <label>Saturation</label>
+        <input name="saturation" type="range" min="0" max="1" step="0.01" value="0.9">
+      </div>
+
+      <div>
+        <label>Brightness</label>
+        <input name="brightness" type="range" min="0" max="1" step="0.01" value="0.9">
+      </div>
+
+      <div>
+        <label>Gradient Mix</label>
+        <input name="gradientMix" type="range" min="0.01" max="5" step="0.01" value="0.9">
+      </div>
     </form>
 
     <div class="save">
       <button>
-        save
+        Save
       </button>
     </div>
   </main>

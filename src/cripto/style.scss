@@ -57,3 +57,34 @@ h1 {
     font-weight: 700;
 }
 
+form div {
+    margin: 0 0 16px 0;
+}
+
+form label {
+    display: block;
+    margin: 0 0 4px 0;
+}
+
+form input {
+    width: 100%;
+}
+
+section canvas {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+button {
+    margin-bottom: 50px;
+    display: block;
+    width: 100%;
+    appearance: none;
+    padding: 16px 24px 16px 24px;
+    font-family: Necto Mono;
+    font-size: 24px;
+    border: none;
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+}
