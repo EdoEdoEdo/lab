@@ -18,6 +18,7 @@ const pages = [
   "camera",
   "coconut",
   "cripto",
+  "cloth-studios",
   "donuts",
   "fake3d",
   "fbm",
