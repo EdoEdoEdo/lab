@@ -1,8 +1,11 @@
-@import './reset.scss';
-
 @font-face {
-    font-family: Porpora;
-    src: url(porpora-regular.woff2);
+  font-family: "Porpora";
+  src: url(porpora-regular.woff2);
+}
+
+@keyframes startanim {
+  0% { transform: translate(-101%, 0); }
+  100% { transform: translate(0, 0); }
 }
 
 :root {
@@ -20,25 +23,17 @@ body.dark {
   --highlight: #ffffff;
 }
 
-*
-{
-    margin: 0;
-    padding: 0;
-}
+body {
+	font-family: Porpora;
+	font-size: 24px;
+	line-height: 1;
 
-body
-{
-    font-family: Porpora;
-    font-size: 24px;
-    line-height: 1;
+	background-color: var(--background);
+  background-image: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.25));
 
-    background-color: var(--background);
-    background-image: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.25));
-    color: var(--highlight);
+	color: var(--highlight);
 
-    height: 100vh;
-
-    transition: background-color 0.5s, color 0.5s;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 header {
@@ -48,10 +43,12 @@ header {
 
   display: flex;
   flex-direction: column;
+
+  overflow: hidden;
 }
 
 h1, div.description, nav a {
-  padding: 8px 17px 8px 12px;
+  padding: 8px 12px 8px 12px;
   text-align: center;
 
   background-color: var(--highlight);
@@ -73,27 +70,33 @@ nav a {
   margin: 0 2px 0 0;
   text-decoration: none;
 
-  transition: background-color 0.4s, color 0.4s;
+  transition: background-color 0.2s, color 0.2s;
+}
 
-  &:last-child {
-    margin: 0;
-  }
+nav a:last-child {
+  margin: 0;
+}
 
-  &:hover {
-    background-color: transparent;
-    color: var(--highlight);
-  }
+nav a:hover {
+  background-color: transparent;
+  color: var(--highlight);
 }
 
 section {
   min-height: 100vh;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    max-height: 75vh;
-  }
-
+  overflow: hidden;
 }
+
+h1 {
+  animation: startanim 1s 1.5s both;
+}
+
+div.description {
+  animation: startanim 1.25s 1.75s both;
+}
+
+nav {
+  animation: startanim 1.5s 2s both;
+}
+
