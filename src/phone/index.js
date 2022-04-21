@@ -8,12 +8,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShaders from './shaders/fragment.glsl'
-
-import firefliesVertexShader from './shaders/fireflies/vertex.glsl'
-import firefliesFragmentShader from './shaders/fireflies/fragment.glsl'
 
 /////////////////////////////////////////////////////////////////////////
 //// DRACO LOADER TO LOAD DRACO COMPRESSED MODELS FROM BLENDER
@@ -33,7 +31,8 @@ document.body.appendChild(container)
 const scene = new THREE.Scene()
 // scene.add(new THREE.AxesHelper(50))
 scene.fog = new THREE.Fog(0xDCEAB2, 100,950);
-scene.background = new THREE.Color('#DCEAB2')
+scene.background = new THREE.Color('#ffffff')
+
 
 /////////////////////////////////////////////////////////////////////////
 ///// RENDERER CONFIG
@@ -46,7 +45,7 @@ container.appendChild(renderer.domElement) // add the renderer to html div
 /////////////////////////////////////////////////////////////////////////
 ///// CAMERAS CONFIG
 const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 100)
-camera.position.set(50,50,50)
+camera.position.set(0,0,30)
 scene.add(camera)
 
 /////////////////////////////////////////////////////////////////////////
@@ -63,103 +62,38 @@ window.addEventListener('resize', () => {
 
 /////////////////////////////////////////////////////////////////////////
 ///// CREATE ORBIT CONTROLS
-const controls = new OrbitControls(camera, renderer.domElement)
+// const controls = new OrbitControls(camera, renderer.domElement)
 
 /////////////////////////////////////////////////////////////////////////
 ///// SCENE LIGHTS
 const ambient = new THREE.AmbientLight(0xaffffff, 0.82)
-scene.add(ambient)
+// scene.add(ambient)
 
 const sunLight = new THREE.DirectionalLight(0xffffff, 1.96)
 sunLight.position.set(69,44,14)
 scene.add(sunLight)
 
-/////////////////////////////////////////////////////////////////////////
-///// MATERIALS
-const waterGeometry = new THREE.PlaneGeometry(160, 160, 512, 512);
-
-const waterMaterial = new THREE.ShaderMaterial({
-  wireframe: false,
-  vertexShader: vertexShader,
-  fragmentShader: fragmentShaders,
-  transparent: true,
-  fog: true,
-  uniforms: {
-    uTime: { value: 0 },
-    uMouse: { value: new THREE.Vector2() },
-    uBigWavesElevation: { value: 0.245 },
-    uBigWavesFrequency: { value: new THREE.Vector2(4, 2) },
-    uBigWaveSpeed: { value: 1.5 },
-    // Small Waves
-    uSmallWavesElevation: { value: 0.15 },
-    uSmallWavesFrequency: { value: 3 },
-    uSmallWavesSpeed: { value: 0.2 },
-    uSmallWavesIterations: { value: 4 },
-    // Color
-    uDepthColor: { value: new THREE.Color('#56B2F8') },
-    uSurfaceColor: { value: new THREE.Color('#56B2F8') },
-    uColorOffset: { value: 0.08 },
-    uColorMultiplier: { value: 5 },
-
-    // Fog, contains fogColor, fogDensity, fogFar and fogNear
-    ...THREE.UniformsLib["fog"]
-  }
-});
-const water = new THREE.Mesh(waterGeometry, waterMaterial);
-water.position.set(0, -0.5, 0)
-water.rotation.x = -Math.PI * 0.5;
-scene.add(water);
-
-/////////////////////////////////////////////////////////////////////////
-///// FIREFLIES
-/**
- * Fireflies
- */
-// Geometry
-const firefliesGeometry = new THREE.BufferGeometry()
-const firefliesCount = 300
-const positionArray = new Float32Array(firefliesCount * 3)
-const scaleArray = new Float32Array(firefliesCount)
-
-for(let i = 0; i < firefliesCount; i++)
-{
-    positionArray[i * 3 + 0] = (Math.random() - 0.5) * 40
-    positionArray[i * 3 + 1] = Math.random() * 15
-    positionArray[i * 3 + 2] = (Math.random() - 0.5) * 40
-
-    scaleArray[i] = Math.random()
-}
-
-firefliesGeometry.setAttribute('position', new THREE.BufferAttribute(positionArray, 3))
-firefliesGeometry.setAttribute('aScale', new THREE.BufferAttribute(scaleArray, 1))
-
-// Material
-// const firefliesMaterial = new THREE.PointsMaterial({ size: 0.1, sizeAttenuation: true })
-const firefliesMaterial = new THREE.ShaderMaterial({
-    uniforms:
-    {
-        uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
-        uSize: { value: 1000 },
-        uTime: { value: 0 },
-    },
-    vertexShader: firefliesVertexShader,
-    fragmentShader: firefliesFragmentShader,
-    transparent: true,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-})
-// gui.add(firefliesMaterial.uniforms.uSize, 'value').min(0).max(500).step(1).name('firefliesSize')
-
-// Points
-const fireflies = new THREE.Points(firefliesGeometry, firefliesMaterial)
-scene.add(fireflies)
-
-
+let mesh
 /////////////////////////////////////////////////////////////////////////
 ///// LOADING GLB/GLTF MODEL FROM BLENDER
-loader.load('ektogamat/bathroom-accessories.glb', function (gltf) {
-  gltf.scene.scale.set(5, 5, 5);
-  scene.add(gltf.scene)
+loader.load('models/phone/generic-phone.glb', function (gltf) {
+  gltf.scene.scale.set(70, 70, 70);
+  mesh = gltf.scene
+  scene.add(mesh)
+
+  gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(mesh.rotation, {
+  scrollTrigger: {
+  trigger: "#trigger",
+  start: "top top",
+  end: "bottom top",
+  scrub: true,
+  toggleActions: "restart pause resume pause"
+},
+  y: Math.PI
+});
+
 })
 
 /////////////////////////////////////////////////////////////////////////
@@ -169,10 +103,10 @@ const menu = document.querySelector('.container')
 function introAnimation() {
   controls.enabled = false //disable orbit controls to animate the camera
 
-  new TWEEN.Tween(camera.position.set(26,5,-35 )).to({ // from camera position
-      x: 40, //desired x position to go
-      y: 15, //desired y position to go
-      z: 20 //desired z position to go
+  new TWEEN.Tween(camera.position.set(10, 10, 10)).to({ // from camera position
+      x: -20, //desired x position to go
+      y: -20, //desired y position to go
+      z: -20 //desired z position to go
   }, 6500) // time take to animate
   .delay(1000).easing(TWEEN.Easing.Quartic.InOut).start() // define delay, easing
   .onComplete(function () { //on finish animation
@@ -183,26 +117,8 @@ function introAnimation() {
   })
 }
 
-introAnimation() // call intro animation on start
+// introAnimation() // call intro animation on start
 
-/////////////////////////////////////////////////////////////////////////
-//// VISIT
-menu.addEventListener('click', function (e) {
-  controls.enabled = false //disable orbit controls to animate the camera
-  gsap.to(menu, {opacity: 0} ) // make the menu invisible
-  new TWEEN.Tween(camera.position.set(40,15,20 )).to({ // from camera position
-    x: 30, //desired x position to go
-    y: 5, //desired y position to go
-    z: 0 //desired z position to go
-  }, 6500) // time take to animate
-  .delay(100).easing(TWEEN.Easing.Quartic.InOut).start() // define delay, easing
-  .onComplete(function () { //on finish animation
-      controls.enabled = true //enable orbit controls
-      setOrbitControlsLimits() //enable controls limits
-      TWEEN.remove(this) // remove the animation from memory
-
-  })
-})
 
 /////////////////////////////////////////////////////////////////////////
 //// DEFINE ORBIT CONTROLS LIMITS
@@ -222,12 +138,10 @@ const clock = new THREE.Clock()
 function rendeLoop() {
 
   const elapsedTime = clock.getElapsedTime()
-  waterMaterial.uniforms.uTime.value = elapsedTime
-  firefliesMaterial.uniforms.uTime.value = elapsedTime
 
   TWEEN.update() // update animations
 
-  controls.update() // update orbit controls
+  // controls.update() // update orbit controls
 
   renderer.render(scene, camera) // render the scene using the camera
 
@@ -236,3 +150,5 @@ function rendeLoop() {
 }
 
 rendeLoop() //start rendering
+
+

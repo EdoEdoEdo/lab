@@ -40,6 +40,7 @@ const pages = [
   "photos",
   "portraits",
   "portal",
+  "phone",
   "rafa",
   "records",
   "records-store",

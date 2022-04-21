@@ -1,0 +1,377 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 243,
+      "max": [
+        -6.801200866699219,
+        25.436086654663086,
+        -6.134313583374023
+      ],
+      "min": [
+        -8.996135711669922,
+        25.295650482177734,
+        -9.101608276367188
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 2916,
+      "componentType": 5126,
+      "count": 243,
+      "max": [
+        0.999917209148407,
+        1.0,
+        0.9985772967338562
+      ],
+      "min": [
+        -0.9999170303344727,
+        -1.0,
+        -0.9985777735710144
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 243,
+      "max": [
+        0.875,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 660,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 5832,
+      "componentType": 5126,
+      "count": 147,
+      "max": [
+        -6.825371742248535,
+        25.440797805786133,
+        -6.159113883972168
+      ],
+      "min": [
+        -8.971964836120605,
+        25.290939331054688,
+        -9.076813697814941
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 7596,
+      "componentType": 5126,
+      "count": 147,
+      "max": [
+        0.9999617338180542,
+        1.0,
+        0.9983299970626831
+      ],
+      "min": [
+        -0.999961256980896,
+        -1.0,
+        -0.9983294010162354
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1944,
+      "componentType": 5126,
+      "count": 147,
+      "max": [
+        0.875,
+        0.25
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 2640,
+      "componentType": 5125,
+      "count": 348,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 9360,
+      "componentType": 5126,
+      "count": 145,
+      "max": [
+        -8.169086456298828,
+        25.44222640991211,
+        -6.497222900390625
+      ],
+      "min": [
+        -8.410359382629395,
+        25.44222640991211,
+        -6.6137309074401855
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 11100,
+      "componentType": 5126,
+      "count": 145,
+      "max": [
+        0.0,
+        1.0,
+        0.007822106592357159
+      ],
+      "min": [
+        0.0,
+        0.9999662637710571,
+        -0.008222127333283424
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 3120,
+      "componentType": 5126,
+      "count": 145,
+      "max": [
+        0.9499232769012451,
+        0.48522263765335083
+      ],
+      "min": [
+        0.001896061236038804,
+        0.0019920323975384235
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 4032,
+      "componentType": 5125,
+      "count": 417,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Ole Gunnar Isager (https://sketchfab.com/FrenchBaguette)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/smart-phone-school-project-5134059a9eb844c1b106e4cb7eafd88c",
+      "title": "Smart Phone (School Project)"
+    },
+    "generator": "Sketchfab-12.59.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 5700,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 4280,
+      "byteOffset": 5700,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 12840,
+      "byteOffset": 9980,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 22820,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "MetalRim",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.714286,
+          0.714286,
+          0.714286,
+          1.0
+        ],
+        "roughnessFactor": 0.5200076219512195
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "PhoneGlass",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.00649351,
+          0.00649351,
+          0.00649351,
+          1.0
+        ],
+        "roughnessFactor": 0.0
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "typeBlinn1",
+      "pbrMetallicRoughness": {
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9207483816249483
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Phone_MetalRim_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Phone_PhoneGlass_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Phone_typeBlinn1_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 9,
+            "POSITION": 8,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        0.9367833137512207,
+        -0.34991008043289185,
+        -7.76956455690074e-17,
+        0.0,
+        -0.3305702805519104,
+        -0.885006546974182,
+        -0.3278515636920931,
+        0.0,
+        0.11471857130527496,
+        0.3071258664131167,
+        -0.9447292685508727,
+        0.0,
+        -0.8910369277000427,
+        21.553318023681637,
+        18.843540191650394,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "f2063c893b794b2bad544faa29dc8104.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4,
+        5,
+        6
+      ],
+      "name": "Phone"
+    },
+    {
+      "mesh": 0,
+      "name": "Phone_MetalRim_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Phone_PhoneGlass_0"
+    },
+    {
+      "mesh": 2,
+      "name": "Phone_typeBlinn1_0"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
