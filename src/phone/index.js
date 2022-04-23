@@ -81,19 +81,8 @@ loader.load('models/phone/generic-phone.glb', function (gltf) {
   mesh = gltf.scene
   scene.add(mesh)
 
-  gsap.registerPlugin(ScrollTrigger);
-
-gsap.to(mesh.rotation, {
-  scrollTrigger: {
-  trigger: "#trigger",
-  start: "top top",
-  end: "bottom top",
-  scrub: true,
-  toggleActions: "restart pause resume pause"
-},
-  y: Math.PI
-});
-
+  setupPlugins();
+  setupAnimScrollTrigger();
 })
 
 /////////////////////////////////////////////////////////////////////////
@@ -148,7 +137,55 @@ function rendeLoop() {
   requestAnimationFrame(rendeLoop) //loop the render function
 
 }
-
 rendeLoop() //start rendering
 
+function setupPlugins() {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+
+Math.degToRad = degrees => degrees * (Math.PI / 180);
+function setupAnimScrollTrigger() {
+
+  // OPENING ANIMATION
+  const opening = new gsap.timeline()
+    .fromTo(camera.position, {z: 60}, {z: 40, ease: 'Circ.easeOut', duration: 1.5}, 'opening')
+    // .fromTo(camera.rotation, {y: -Math.degToRad(30), x: -Math.degToRad(-5)}, {y: 0, x: 0, ease: 'Circ.easeOut', duration: 1.5}, 'opening')
+    // SHOW THE SCROLLER
+    .set(".scroller",{visibility: "visible"});
+
+  // ROTATE THE PHONE WHEN SCROLL IN ON TOP OF SCREEN
+  // const rotation = new gsap.timeline({
+  //   scrollTrigger: {
+  //     toggleActions: "play pause play pause",
+  //     trigger: ".welcome",
+  //     start: "top bottom",
+  //     end: "top -1",
+  //   }
+  // })
+  // .to(mesh.rotation, {y:Math.degToRad(360), ease:'none', repeat:-1, duration: 30});
+
+  const animation = new gsap.timeline({
+    scrollTrigger: {
+      trigger: ".content",
+      scrub: true,
+      start: "top bottom",
+      end: "bottom bottom",
+    }
+  })
+  // ROTATE THE PHONE
+  .to(mesh.rotation, {y: Math.degToRad(133.8025067+90), x: Math.degToRad(18.65275889), ease: 'power2.inOut', duration: 0.75}, 0)
+  // ZOOM THE CAMERA
+  .to(camera.position, {z:30, ease: 'linear', duration: 0.75}, 0)
+  // HIDE SCROLLER
+  .set(".scroller",{visibility: "hidden"}, 0.2)
+  // MORE ROTATION
+  .to(mesh.rotation, {y: -Math.degToRad(136.78344100200877-90), x: Math.degToRad(5.1083794384352), ease: 'power2.inOut', duration: 0.75}, 1)
+  .to(mesh.rotation, {y: Math.degToRad(58.5876741+90), x: Math.degToRad(-14.00586857), ease: 'power2.inOut', duration: 0.75}, 2)
+
+  .to(mesh.rotation, {y: Math.degToRad(164.1956286+90), x: Math.degToRad(-2.166284249), ease: 'power2.inOut', duration: 0.75}, 3)
+  .to(mesh.rotation, {y: Math.degToRad(90), x: Math.degToRad(39.66724753), ease: 'power2.inOut', duration: 0.75}, 4)
+  .to(mesh.rotation, {y: Math.degToRad(116.7076259+90), x: Math.degToRad(-2.623623306), ease: 'power2.inOut', duration: 0.75}, 5)
+
+}
 

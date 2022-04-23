@@ -10,5 +10,57 @@ body
 	margin: 0;
 	padding: 0;
 	overscroll-behavior: none;
-	overflow: hidden;
+}
+
+.scroller {
+	z-index:3;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  bottom: 4%;
+  transform: translate(-50%, 0);
+  visibility: hidden;
+  svg {
+    width: 4vmin;
+    height: auto;
+
+    polygon {
+      animation: scroll 1s ease-in alternate-reverse infinite;
+    }
+    &:nth-child(2) {
+      transform: translate(0, -1vmin);
+      polygon {
+        animation-delay: 0.33s;
+      }
+    }
+    &:nth-child(3) {
+      transform: translate(0, -2vmin);
+      polygon {
+        animation-delay: 0.66s;
+      }
+    }
+  }
+}
+
+@keyframes scroll {
+  0% {
+    fill-opacity: 0;
+  }
+
+  100% {
+    fill-opacity: 1;
+  }
+}
+
+.section, .content {
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  position: relative;
+}
+
+canvas {
+  position:fixed;
+  top: 0;
 }
