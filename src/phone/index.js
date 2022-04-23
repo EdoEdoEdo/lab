@@ -10,9 +10,10 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
+import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js'
 
 import vertexShader from './shaders/vertex.glsl'
-import fragmentShaders from './shaders/fragment.glsl'
+import fragmentShader from './shaders/fragment.glsl'
 
 /////////////////////////////////////////////////////////////////////////
 //// FEATURES
@@ -130,13 +131,27 @@ window.addEventListener('resize', () => {
 /////////////////////////////////////////////////////////////////////////
 ///// SCENE LIGHTS
 const ambient = new THREE.AmbientLight(0xaffffff, 0.82)
-// scene.add(ambient)
+scene.add(ambient)
 
 const sunLight = new THREE.DirectionalLight(0xffffff, 1.96)
-sunLight.position.set(69,44,14)
+sunLight.position.set(80,80,80)
 scene.add(sunLight)
+// const helper = new THREE.DirectionalLightHelper( sunLight, 5 );
+// scene.add( helper );
 
 let mesh
+/////////////////////////////////////////////////////////////////////////
+///// MATERIALS
+// Screen light material
+const screenLightMaterial = new THREE.ShaderMaterial({
+  vertexShader: vertexShader,
+  fragmentShader: fragmentShader,
+  uniforms:
+  {
+      uTime: { value: 0 }
+  },
+})
+
 /////////////////////////////////////////////////////////////////////////
 ///// LOADING GLB/GLTF MODEL FROM BLENDER
 loader.load('models/phone/generic-phone.glb', function (gltf) {
@@ -144,10 +159,45 @@ loader.load('models/phone/generic-phone.glb', function (gltf) {
   mesh = gltf.scene
   scene.add(mesh)
 
+  // traverse the model to search for glass objects
+  gltf.scene.traverse((obj) => {
+    if (obj.isMesh) {
+      if(obj.material.name === 'Screen') {
+        obj.material = screenLightMaterial
+      }
+    }
+  })
+
   setupPlugins();
   setupAnimScrollTrigger();
   setupContentScrollTrigger();
 })
+
+/////////////////////////////////////////////////////////////////////////
+///// PMREM GENERATOR FOR SCENE ENVIRONMENT
+const pmremGenerator = new THREE.PMREMGenerator(renderer)
+console.log('pmremGenerator', pmremGenerator)
+pmremGenerator.compileEquirectangularShader()
+
+function loadObjectAndAndEnvMap() {
+console.log('newEnvMap2 loading', newEnvMap2)
+    scene.environment = newEnvMap2
+
+}
+
+let newEnvMap2
+new EXRLoader()
+.load(
+    "models/phone/studio_small_05_1k.exr",
+    function (texture) {
+        const exrCubeRenderTarget = pmremGenerator.fromEquirectangular(texture)
+        newEnvMap2 = exrCubeRenderTarget ? exrCubeRenderTarget.texture : null
+        // newEnvMap.offset.y = 500
+        loadObjectAndAndEnvMap() // Add envmap once the texture has been loaded
+
+        texture.dispose()
+    }
+)
 
 /////////////////////////////////////////////////////////////////////////
 //// INTRO CAMERA ANIMATION USING TWEEN
@@ -191,6 +241,7 @@ const clock = new THREE.Clock()
 function rendeLoop() {
 
   const elapsedTime = clock.getElapsedTime()
+  screenLightMaterial.uniforms.uTime.value = elapsedTime
 
   TWEEN.update() // update animations
 
