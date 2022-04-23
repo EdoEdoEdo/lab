@@ -9,9 +9,72 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TextPlugin } from "gsap/TextPlugin";
 
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShaders from './shaders/fragment.glsl'
+
+/////////////////////////////////////////////////////////////////////////
+//// FEATURES
+
+const features = [
+  {
+    title: 'Feature 1',
+    coords: {
+      Latitude: '18.65275889',
+      Longitude: '-133.8025067'
+    },
+    selector: '.f1'
+  },
+  {
+    title: 'Feature 2',
+    coords: {
+      Latitude: '136.783441',
+      Longitude: '-5.10837943'
+    },
+    selector: '.f2'
+  },
+  {
+    title: 'Feature 3',
+    coords: {
+      Latitude: '-14.00586857',
+      Longitude: '-58.5876741'
+    },
+    selector: '.f3'
+  },
+  {
+    title: 'Feature 4',
+    coords: {
+      Latitude: '-2.166284249',
+      Longitude: '-164.1956286'
+    },
+    selector: '.f4'
+  },
+  {
+    title: 'Feature 5',
+    coords: {
+      Latitude: '39.66724753',
+      Longitude: '0'
+    },
+    selector: '.f5'
+  },
+  {
+    title: 'Feature 6',
+    coords: {
+      Latitude: '-2.623623306',
+      Longitude: '-116.7076259'
+    },
+    selector: '.f6'
+  },
+  {
+    title: 'Feature 7',
+    coords: {
+      Distance: '23,460 km',
+      Radius: '6.2 km'
+    },
+    selector: '.f7'
+  },
+]
 
 /////////////////////////////////////////////////////////////////////////
 //// DRACO LOADER TO LOAD DRACO COMPRESSED MODELS FROM BLENDER
@@ -83,6 +146,7 @@ loader.load('models/phone/generic-phone.glb', function (gltf) {
 
   setupPlugins();
   setupAnimScrollTrigger();
+  setupContentScrollTrigger();
 })
 
 /////////////////////////////////////////////////////////////////////////
@@ -141,6 +205,7 @@ rendeLoop() //start rendering
 
 function setupPlugins() {
   gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(TextPlugin);
 }
 
 
@@ -175,17 +240,71 @@ function setupAnimScrollTrigger() {
   })
   // ROTATE THE PHONE
   .to(mesh.rotation, {y: Math.degToRad(133.8025067+90), x: Math.degToRad(18.65275889), ease: 'power2.inOut', duration: 0.75}, 0)
-  // ZOOM THE CAMERA
-  .to(camera.position, {z:30, ease: 'linear', duration: 0.75}, 0)
-  // HIDE SCROLLER
+  // .to(this.camera.position, {z:3000, ease: 'linear', duration: 0.75}, 0)
   .set(".scroller",{visibility: "hidden"}, 0.2)
-  // MORE ROTATION
   .to(mesh.rotation, {y: -Math.degToRad(136.78344100200877-90), x: Math.degToRad(5.1083794384352), ease: 'power2.inOut', duration: 0.75}, 1)
   .to(mesh.rotation, {y: Math.degToRad(58.5876741+90), x: Math.degToRad(-14.00586857), ease: 'power2.inOut', duration: 0.75}, 2)
-
   .to(mesh.rotation, {y: Math.degToRad(164.1956286+90), x: Math.degToRad(-2.166284249), ease: 'power2.inOut', duration: 0.75}, 3)
   .to(mesh.rotation, {y: Math.degToRad(90), x: Math.degToRad(39.66724753), ease: 'power2.inOut', duration: 0.75}, 4)
   .to(mesh.rotation, {y: Math.degToRad(116.7076259+90), x: Math.degToRad(-2.623623306), ease: 'power2.inOut', duration: 0.75}, 5)
-
+  .to(camera.position, {z: 30, ease: 'linear'}, 6)
 }
 
+function setupContentScrollTrigger() {
+
+  const onUpdate = function() {
+    const target = this.targets()[0];
+    const time = this.time();
+    const duration = this.duration();
+
+    if (time >= duration || time <= 0) {
+      target.classList.remove('editing');
+      return;
+    }
+    if (!target.classList.contains('editing')) {
+      target.classList.add('editing');
+    }
+  };
+
+  ScrollTrigger.addEventListener("scrollEnd", function(e){
+    const target = document.querySelectorAll('.editing')[0];
+    if (target) {
+      target.classList.add('blink');
+    }
+  });
+
+  ScrollTrigger.addEventListener("scrollStart", function(e){
+    const target = document.querySelectorAll('.editing')[0];
+    if (target) {
+      target.classList.remove('blink');
+    }
+  });
+
+  features.forEach((item, i, arr) => {
+    console.log(item);
+    const timeline = new gsap.timeline({
+        scrollTrigger: {
+          trigger: item.selector,
+          scrub: true,
+          start: 'top 75%',
+          end: `bottom ${i < arr.length - 1 ? '75%' : 'bottom'}`,
+          //markers: {startColor: "green", endColor: "red", fontSize: "12px"}
+        }
+      })
+      .to(`${item.selector} .title`, {text:`${item.title}`, ease: 'linear', duration: 0.25, onUpdate}, 0)
+      // .to(`${item.selector} .lat`, {text: `${getLines(item.coords)[0]}`, ease: 'linear', duration: 0.125, onUpdate}, 0.25)
+      // .to(`${item.selector} .lon`, {text: `${getLines(item.coords)[1]}`, ease: 'linear', duration: 0.125, onUpdate}, 0.375)
+      // .fromTo(`${item.selector} polyline`, {drawSVG: 0}, {drawSVG: '100%', duration: 0.125}, 0.5)
+      // .fromTo('#circle', {drawSVG: 0}, {drawSVG: '100%', duration: 0.125}, 0.625)
+      // .set(`${item.selector} .image-container`, {visibility: 'visible'})
+      // .fromTo(`${item.selector} .image-container`, {width: '0%'}, {width: '25vw', duration: 0.125}, 0.75)
+      // .fromTo(`${item.selector} .image-container`, {height: '0%'}, {height: 'auto', duration: 0.125}, 0.875);
+
+      if(i < arr.length - 1) {
+        timeline.yoyo(true)
+                .repeat(1)
+                .repeatDelay(0.5);
+      }
+
+  });
+}

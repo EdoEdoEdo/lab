@@ -10,6 +10,7 @@ body
 	margin: 0;
 	padding: 0;
 	overscroll-behavior: none;
+  overflow-x: hidden;
 }
 
 .scroller {
@@ -53,14 +54,55 @@ body
   }
 }
 
-.section, .content {
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.section {
   height: 100vh;
   width: 100vw;
   z-index: 1;
   position: relative;
+  display: inline-block;
+
+	&__content {
+    padding: 4vmin;
+    position:fixed;
+    color:black;
+    z-index: 2;
+    top:0;
+    height: calc(100vh - 8vmin);
+    width: calc(100vw - 8vmin);
+    display: flex;
+    flex-direction: column;
+
+    svg {
+      visibility: hidden;
+    }
+
+    .title {
+      font-size: 54px;
+      font-weight: bold;
+    }
+
+		.blink {
+      &:after {
+        animation: blink 1s steps(5, start) infinite;
+      }
+    }
+
+		.editing {
+      &:after {
+        content: "_";
+      }
+    }
+	}
 }
 
 canvas {
   position:fixed;
   top: 0;
 }
+
