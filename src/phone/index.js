@@ -20,58 +20,58 @@ import fragmentShader from './shaders/fragment.glsl'
 
 const features = [
   {
-    title: 'Feature 1',
+    title: 'Accessories',
     coords: {
-      Latitude: '18.65275889',
-      Longitude: '-133.8025067'
+      cover: 'Shockproof Smartphone Protector',
+      earplugs: 'Get up to 5 hrs music playback per charge'
     },
     selector: '.f1'
   },
   {
-    title: 'Feature 2',
+    title: 'Super High Res',
     coords: {
-      Latitude: '136.783441',
-      Longitude: '-5.10837943'
+      UltraHD: '3840×2160',
+      Resolution: '4K Ultra HD'
     },
     selector: '.f2'
   },
   {
-    title: 'Feature 3',
+    title: 'Water Resistent',
     coords: {
-      Latitude: '-14.00586857',
-      Longitude: '-58.5876741'
+      waterproof: '100 feet/30 meters IPX8',
+      Factor: 'Dry Bag'
     },
     selector: '.f3'
   },
   {
-    title: 'Feature 4',
+    title: 'ideal for music',
     coords: {
-      Latitude: '-2.166284249',
-      Longitude: '-164.1956286'
+      sound: 'supersopund system 2khZ',
+      duration: '12 hours'
     },
     selector: '.f4'
   },
   {
-    title: 'Feature 5',
+    title: 'Games',
     coords: {
-      Latitude: '39.66724753',
-      Longitude: '0'
+      games: '2000 games',
+      online: 'multiplayer support'
     },
     selector: '.f5'
   },
   {
-    title: 'Feature 6',
+    title: 'Slim Look',
     coords: {
-      Latitude: '-2.623623306',
-      Longitude: '-116.7076259'
+      width: '2cm',
+      wide: '1cm'
     },
     selector: '.f6'
   },
   {
-    title: 'Feature 7',
+    title: 'Best Cameras',
     coords: {
-      Distance: '23,460 km',
-      Radius: '6.2 km'
+      wide: '12 MP dual-pixe',
+      medium: '16 MP ultrawide rear camera'
     },
     selector: '.f7'
   },
@@ -188,7 +188,7 @@ console.log('newEnvMap2 loading', newEnvMap2)
 let newEnvMap2
 new EXRLoader()
 .load(
-    "models/phone/studio_small_05_1k.exr",
+    "models/phone/mine02.exr",
     function (texture) {
         const exrCubeRenderTarget = pmremGenerator.fromEquirectangular(texture)
         newEnvMap2 = exrCubeRenderTarget ? exrCubeRenderTarget.texture : null
@@ -293,7 +293,8 @@ function setupAnimScrollTrigger() {
   .to(mesh.rotation, {y: Math.degToRad(133.8025067+90), x: Math.degToRad(18.65275889), ease: 'power2.inOut', duration: 0.75}, 0)
   // .to(this.camera.position, {z:3000, ease: 'linear', duration: 0.75}, 0)
   .set(".scroller",{visibility: "hidden"}, 0.2)
-  .to(mesh.rotation, {y: -Math.degToRad(136.78344100200877-90), x: Math.degToRad(5.1083794384352), ease: 'power2.inOut', duration: 0.75}, 1)
+  .set(".buy",{visibility: "visible"}, 0.2)
+  .to(mesh.rotation, {y: -Math.degToRad(10), x: Math.degToRad(5.1083794384352), ease: 'power2.inOut', duration: 0.75}, 1)
   .to(mesh.rotation, {y: Math.degToRad(58.5876741+90), x: Math.degToRad(-14.00586857), ease: 'power2.inOut', duration: 0.75}, 2)
   .to(mesh.rotation, {y: Math.degToRad(164.1956286+90), x: Math.degToRad(-2.166284249), ease: 'power2.inOut', duration: 0.75}, 3)
   .to(mesh.rotation, {y: Math.degToRad(90), x: Math.degToRad(39.66724753), ease: 'power2.inOut', duration: 0.75}, 4)
@@ -315,6 +316,14 @@ function setupContentScrollTrigger() {
     if (!target.classList.contains('editing')) {
       target.classList.add('editing');
     }
+  };
+
+  const getLines = obj => {
+    const lines = [];
+    Object.keys(obj).forEach(x => {
+      lines.push(`${x}: ${obj[x]}`);
+    });
+    return lines;
   };
 
   ScrollTrigger.addEventListener("scrollEnd", function(e){
@@ -343,18 +352,16 @@ function setupContentScrollTrigger() {
         }
       })
       .to(`${item.selector} .title`, {text:`${item.title}`, ease: 'linear', duration: 0.25, onUpdate}, 0)
-      // .to(`${item.selector} .lat`, {text: `${getLines(item.coords)[0]}`, ease: 'linear', duration: 0.125, onUpdate}, 0.25)
-      // .to(`${item.selector} .lon`, {text: `${getLines(item.coords)[1]}`, ease: 'linear', duration: 0.125, onUpdate}, 0.375)
-      // .fromTo(`${item.selector} polyline`, {drawSVG: 0}, {drawSVG: '100%', duration: 0.125}, 0.5)
-      // .fromTo('#circle', {drawSVG: 0}, {drawSVG: '100%', duration: 0.125}, 0.625)
-      // .set(`${item.selector} .image-container`, {visibility: 'visible'})
-      // .fromTo(`${item.selector} .image-container`, {width: '0%'}, {width: '25vw', duration: 0.125}, 0.75)
-      // .fromTo(`${item.selector} .image-container`, {height: '0%'}, {height: 'auto', duration: 0.125}, 0.875);
+      .to(`${item.selector} .lat`, {text: `${getLines(item.coords)[0]}`, ease: 'linear', duration: 0.125, onUpdate}, 0.25)
+      .to(`${item.selector} .lon`, {text: `${getLines(item.coords)[1]}`, ease: 'linear', duration: 0.125, onUpdate}, 0.375)
+      .set(`${item.selector} .image-container`, {visibility: 'visible'})
+      .fromTo(`${item.selector} .image-container`, {width: '0%'}, {width: '20vw', duration: 0.125}, 0.75)
+      .fromTo(`${item.selector} .image-container`, {height: '0%'}, {height: 'auto', duration: 0.125}, 0.875);
 
       if(i < arr.length - 1) {
         timeline.yoyo(true)
-                .repeat(1)
-                .repeatDelay(0.5);
+          .repeat(1)
+          .repeatDelay(0.5);
       }
 
   });

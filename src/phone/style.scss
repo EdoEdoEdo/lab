@@ -109,3 +109,89 @@ canvas {
   top: 0;
 }
 
+
+.info {
+	height: 0;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+
+	&__row {
+		display: flex;
+		flex-grow: 1;
+		height: 50%;
+
+		> div {
+			flex-grow: 1;
+			width:100%;
+		}
+
+		.coords {
+			font-size: 24px;
+			> div {
+				&:last-child {
+					height: calc(100vh/2 - 4vmin - 114px);
+					width:100%;
+				}
+			}
+		}
+
+		.image-container {
+			border: 2px solid black;
+			visibility: hidden;
+			overflow: hidden;
+			position: relative;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			max-height: 100%;
+
+			.image {
+				width: 100%;
+				display: block;
+			}
+		}
+
+		.left {
+			left: 20%;
+		}
+	}
+}
+
+.buy {
+	position: fixed;
+	right: 40px;
+	bottom: 40px;
+	z-index: 2;
+	visibility: hidden;
+
+	button {
+		background: black;
+		color: white;
+		padding: 20px;
+		border-radius: 20px;
+		text-transform: uppercase;
+		border: none;
+		transition: background 0.4s ease-in-out;
+		border: 1px solid white;
+		cursor: pointer;
+
+		&:hover {
+			background: white;
+			border: 1px solid black;
+			color: black;
+		}
+	}
+}
+
+
+.logo{
+	position: fixed;
+	top: 40px;
+	right: 40px;
+	font-size: 24px;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: right;
+}
