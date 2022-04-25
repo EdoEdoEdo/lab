@@ -53,6 +53,7 @@ const pages = [
   "toggle-actions",
   "untitled",
   "xmas",
+  "zippy",
   "workers1",
   "workers2",
   "workers3",
