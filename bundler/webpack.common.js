@@ -25,6 +25,7 @@ const pages = [
   "fbm",
   "flag",
   "fireflies",
+  "flowmap",
   "geometries",
   "glitch",
   "horizontal",
