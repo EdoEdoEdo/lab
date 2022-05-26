@@ -37,6 +37,7 @@ const pages = [
   "loader",
   "ocean",
   "ogl",
+  "ogl-draw",
   "ogl-triangle-shader",
   "ogl2",
   "photos",

@@ -1,5 +1,5 @@
 import './style.scss';
-import { Renderer, Program, Color, Mesh, Triangle } from 'ogl';
+import { Renderer, Program, Color, Mesh, Triangle, Plane } from 'ogl';
 
 const vertex = /* glsl */ `
   attribute vec2 uv;
@@ -42,6 +42,7 @@ const program = new Program(gl, {
     }
 })
 
+// const geometry = new Plane(gl, {width: window.innerWidth, height: window.innerHeight});
 const geometry = new Triangle(gl);
 const mesh = new Mesh(gl, {geometry, program})
 
