@@ -1,14 +1,21 @@
-import { Renderer, Camera, Transform, Program, Mesh, Plane, Sphere, Box, Cylinder, Orbit } from 'ogl';
+import { Renderer, Camera, Transform, Program, Mesh, Plane, Sphere, Box, Cylinder, Orbit, Texture } from 'ogl';
 
 const vertex = /* glsl */ `
     attribute vec3 position;
     attribute vec3 normal;
+    attribute vec2 uv;
+
     uniform mat4 modelViewMatrix;
     uniform mat4 projectionMatrix;
     uniform mat3 normalMatrix;
+
     varying vec3 vNormal;
+    varying vec2 vUv;
+
     void main() {
+        vUv = uv;
         vNormal = normalize(normalMatrix * normal);
+
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
 `;
@@ -16,10 +23,17 @@ const vertex = /* glsl */ `
 const fragment = /* glsl */ `
     precision highp float;
     varying vec3 vNormal;
+
+    uniform sampler2D tMap;
+
+    varying vec2 vUv;
+
     void main() {
         vec3 normal = normalize(vNormal);
+        vec3 tex = texture2D(tMap, vUv).rgb;
+
         float lighting = dot(normal, normalize(vec3(-0.3, 0.8, 0.6)));
-        gl_FragColor.rgb = vec3(0.2, 0.8, 1.0) + lighting * 0.1;
+        gl_FragColor.rgb = tex + lighting * 0.1;
         gl_FragColor.a = 1.0;
     }
 `;
@@ -44,6 +58,11 @@ const fragment = /* glsl */ `
 
     const scene = new Transform();
 
+    const texture = new Texture(gl);
+    const img = new Image();
+    img.onload = () => (texture.image = img);
+    img.src = 'ogl/fox.jpeg';
+
     const planeGeometry = new Plane(gl);
     const sphereGeometry = new Sphere(gl);
     const cubeGeometry = new Box(gl);
@@ -52,6 +71,10 @@ const fragment = /* glsl */ `
     const program = new Program(gl, {
         vertex,
         fragment,
+
+        uniforms: {
+            tMap: { value: texture }
+        },
 
         // Don't cull faces so that plane is double sided - default is gl.BACK
         cullFace: null,
