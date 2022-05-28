@@ -26,7 +26,7 @@ const fragment = /* glsl */ `
     uniform float uTime;
 
     uniform sampler2D tMap;
-    
+
     varying vec2 vUv;
     varying vec3 vNormal;
     void main() {
@@ -70,11 +70,13 @@ const program = new Program(gl, {
     },
 });
 
-let mesh;
+let mesh, meshWire;
 loadModel();
 async function loadModel() {
     const data = await (await fetch(`ogl/fox.json`)).json();
 
+    // Mesh
+    // ================================================================
     const geometry = new Geometry(gl, {
         position: { size: 3, data: new Float32Array(data.position) },
         uv: { size: 2, data: new Float32Array(data.uv) },
@@ -83,6 +85,29 @@ async function loadModel() {
 
     mesh = new Mesh(gl, { geometry, program });
     mesh.setParent(scene);
+    mesh.position.x = 4;
+
+    // Mesh (wireframe)
+    // ================================================================
+
+    // For an accurate wireframe, triangle vertices need to be duplicated to make line pairs.
+    // Here we do so by generating indices. If your geometry is already indexed, this needs to be adjusted.
+    let index = new Uint16Array((data.position.length / 3 / 3) * 6);
+    for (let i = 0; i < data.position.length / 3; i += 3) {
+        // For every triangle, make three line pairs (start, end)
+        index.set([i, i + 1, i + 1, i + 2, i + 2, i], i * 2);
+    }
+
+    const wireframeGeometry = new Geometry(gl, {
+        position: { size: 3, data: new Float32Array(data.position) },
+        uv: { size: 2, data: new Float32Array(data.uv) },
+        normal: { size: 3, data: new Float32Array(data.normal) },
+        index: { data: index },
+    });
+
+    meshWire = new Mesh(gl, { mode: gl.LINES, geometry: wireframeGeometry, program });
+    meshWire.setParent(scene);
+    meshWire.position.x = -4;
 }
 
 requestAnimationFrame(update);
@@ -90,5 +115,7 @@ function update() {
     requestAnimationFrame(update);
 
     if (mesh) mesh.rotation.y -= 0.005;
+    if (meshWire) meshWire.rotation.y -= 0.005;
+
     renderer.render({ scene, camera });
 }
