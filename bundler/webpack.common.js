@@ -38,6 +38,7 @@ const pages = [
   "ocean",
   "ogl",
   "ogl-json",
+  "ogl-particles",
   "ogl-index",
   "ogl-draw",
   "ogl-triangle-shader",
