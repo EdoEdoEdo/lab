@@ -39,6 +39,7 @@ const pages = [
   "ogl",
   "ogl-json",
   "ogl-instance",
+  "ogl-gpu-pick",
   "ogl-particles",
   "ogl-index",
   "ogl-draw",
