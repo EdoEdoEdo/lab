@@ -38,6 +38,7 @@ const pages = [
   "ocean",
   "ogl",
   "ogl-json",
+  "ogl-curves",
   "ogl-polylines",
   "ogl-instance",
   "ogl-gpu-pick",
