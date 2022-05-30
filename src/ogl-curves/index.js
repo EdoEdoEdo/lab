@@ -1,5 +1,5 @@
 import './style.scss'
-import { Renderer, Camera, Transform, Program, Mesh, Sphere, Polyline, Orbit, Vec3, Color, Curve } from 'ogl'
+import { Renderer, Camera, Transform, Program, Mesh, Sphere, Polyline, Orbit, Vec3, Color, Curve, Torus } from 'ogl'
 
 const vertex = /* glsl */ `
     attribute vec3 position;
@@ -60,6 +60,7 @@ const program = new Program(gl, {
 
 const sphere = new Mesh(gl, { geometry: sphereGeometry, program })
 sphere.setParent(scene)
+sphere.position.set(-2, 0, 0)
 
 const curve = new Curve({
     points: [new Vec3(0, 0.5, 0), new Vec3(0, 1, 1), new Vec3(0, -1, 1), new Vec3(0, -0.5, 0)],
@@ -105,11 +106,30 @@ for (let i = 0; i <= 60; i++) {
     mesh.rotation.y = (i * Math.PI) / 60;
 }
 
+// TORUS
+// ========================================
+const torusGeometry = new Torus(gl, {
+    radius: 1,
+    tube: 0.4,
+    radialSegments: 16,
+    tubularSegments: 32,
+})
+
+const torus = new Mesh(gl, { geometry: torusGeometry, program })
+torus.setParent(scene)
+torus.position.set(2, 0, 0)
+
+// ========================================
+
 requestAnimationFrame(update)
 function update(){
     requestAnimationFrame(update)
 
     sphere.rotation.y -= 0.01;
+
+    torus.rotation.x += 0.001;
+    torus.rotation.y += 0.005;
+    torus.rotation.z += 0.003;
 
     controls.update()
     renderer.render({scene, camera})
