@@ -45,6 +45,7 @@ const pages = [
   "ogl-particles",
   "ogl-index",
   "ogl-draw",
+  "ogl-transparency",
   "ogl-scene",
   "ogl-triangle-shader",
   "ogl2",
