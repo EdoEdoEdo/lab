@@ -87,7 +87,7 @@ const fragment = /* glsl */ `
 
     for (let i = 0; i < 50; i++) {
         const mesh = new Mesh(gl, { geometry, program });
-        mesh.position.set((Math.random() - 0.5) * 3, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 3);
+        mesh.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 3);
         mesh.rotation.set(0, (Math.random() - 0.5) * 6.28, (Math.random() - 0.5) * 6.28);
         mesh.scale.set(Math.random() * 0.5 + 0.2);
         mesh.speed = Math.random() * 1.5 + 0.2;
