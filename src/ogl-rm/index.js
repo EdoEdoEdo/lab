@@ -105,7 +105,7 @@ gl.clearColor(0.9, 0.9, 0.9, 1);
 const camera = new Camera(gl, { fov: 45 });
 camera.position.set(0, 0, 7);
 
-const controls = new Orbit(camera);
+// const controls = new Orbit(camera);
 
 const scene = new Transform()
 
@@ -152,6 +152,31 @@ function random(a, b) {
 
     lines.push(line);
 });
+
+// Add handlers to get mouse position
+const mouse = new Vec3();
+if ('ontouchstart' in window) {
+    window.addEventListener('touchstart', updateMouse, false);
+    window.addEventListener('touchmove', updateMouse, false);
+} else {
+    window.addEventListener('mousemove', updateMouse, false);
+}
+
+function updateMouse(e) {
+    if (e.changedTouches && e.changedTouches.length) {
+        e.x = e.changedTouches[0].pageX;
+        e.y = e.changedTouches[0].pageY;
+    }
+    if (e.x === undefined) {
+        e.x = e.pageX;
+        e.y = e.pageY;
+    }
+
+    // Get mouse value in -1 to 1 range, with y flipped
+    mouse.set((e.x / gl.renderer.width) * 2 - 1, (e.y / gl.renderer.height) * -2 + 1, 0);
+}
+
+const tmp = new Vec3();
 
 // Polylines [end] ================================================
 
@@ -216,32 +241,6 @@ function resize(){
 window.addEventListener('resize', resize, false)
 resize()
 
-// Add handlers to get mouse position
-const mouse = new Vec3();
-if ('ontouchstart' in window) {
-    window.addEventListener('touchstart', updateMouse, false);
-    window.addEventListener('touchmove', updateMouse, false);
-} else {
-    window.addEventListener('mousemove', updateMouse, false);
-}
-
-function updateMouse(e) {
-    if (e.changedTouches && e.changedTouches.length) {
-        e.x = e.changedTouches[0].pageX;
-        e.y = e.changedTouches[0].pageY;
-    }
-    if (e.x === undefined) {
-        e.x = e.pageX;
-        e.y = e.pageY;
-    }
-
-    // Get mouse value in -1 to 1 range, with y flipped
-    mouse.set((e.x / gl.renderer.width) * 2 - 1, (e.y / gl.renderer.height) * -2 + 1, 0);
-}
-
-const tmp = new Vec3();
-
-
 requestAnimationFrame(update)
 function update(t){
     requestAnimationFrame(update)
@@ -263,6 +262,6 @@ function update(t){
     });
 
 
-    controls.update();
+    // controls.update();
     renderer.render({scene, camera})
 }
