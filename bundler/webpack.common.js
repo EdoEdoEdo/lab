@@ -39,6 +39,8 @@ const pages = [
   "ogl",
   "ogl-flat-shading-matcap",
   "ogl-json",
+  "ogl-rm",
+  "ogl-msdf",
   "ogl-raycasting",
   "ogl-frustum-culling",
   "ogl-curves",
