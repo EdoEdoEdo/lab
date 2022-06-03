@@ -37,6 +37,7 @@ const pages = [
   "loader",
   "ocean",
   "ogl",
+  "ogl-flat-shading-matcap",
   "ogl-json",
   "ogl-raycasting",
   "ogl-frustum-culling",
