@@ -17,20 +17,26 @@ const scene = new THREE.Scene()
 const stats = new Stats()
 document.body.appendChild(stats.dom)
 
-
-
 const axis = new THREE.AxesHelper(4)
 scene.add(axis)
 
 /**
  * Object
  */
-const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+
+// Cube
+const geometry = new THREE.BoxGeometry(1, 1, 1)
 const mesh = new THREE.Mesh(geometry, material)
 mesh.name = 'cube'
 mesh.castShadow = true
 scene.add(mesh)
+
+// Sphere
+const sphereGeometry = new THREE.SphereGeometry(0.1, 32, 16)
+const sphere = new THREE.Mesh(sphereGeometry, material)
+sphere.position.set(2, 0.1, 0)
+scene.add(sphere)
 
 // Plane
 const loader = new THREE.TextureLoader();
@@ -171,6 +177,10 @@ const tick = () =>
     // Update controls
     controls.update()
 
+    // Move the sphere
+    sphere.position.x = 2 * Math.sin(elapsedTime)
+    sphere.position.z = 2 * Math.cos(elapsedTime)
+
     // Render
     renderer.render(scene, camera)
 
@@ -178,7 +188,7 @@ const tick = () =>
     stats.update()
 
     // Call tick again on the next frame
-    window.requestAnimationFrame(tick)
+    requestAnimationFrame(tick)
 }
 
 tick()
