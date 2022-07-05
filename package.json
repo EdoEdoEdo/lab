@@ -36,7 +36,9 @@
     "vercel": "^23.1.2",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "lodash.throttle": "^4.1.1",
+    "splitting": "^1.0.6"
   },
   "devDependencies": {
     "auto-bind": "^5.0.1",

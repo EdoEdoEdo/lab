@@ -68,6 +68,7 @@ const pages = [
   "scroll",
   "scrolltrigger",
   "smoke",
+  "spotlight",
   "scaleup",
   "template",
   "toggle-actions",
