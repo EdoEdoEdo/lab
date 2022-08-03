@@ -75,6 +75,7 @@ const pages = [
   "untitled",
   "xmas",
   "zippy",
+  "webgl-flag",
   "workers1",
   "workers2",
   "workers3",
