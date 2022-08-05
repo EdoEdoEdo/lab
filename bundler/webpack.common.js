@@ -28,6 +28,7 @@ const pages = [
   "flowmap",
   "geometries",
   "glitch",
+  "houdini",
   "horizontal",
   "howler",
   "index",
