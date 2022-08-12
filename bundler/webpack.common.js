@@ -63,6 +63,7 @@ const pages = [
   "phone",
   "rafa",
   "refraction",
+  "rtm-refraction",
   "records",
   "records-store",
   "render-target",
