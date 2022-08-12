@@ -62,6 +62,7 @@ const pages = [
   "portal",
   "phone",
   "rafa",
+  "refraction",
   "records",
   "records-store",
   "render-target",
