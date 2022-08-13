@@ -74,6 +74,8 @@ const pages = [
   "spotlight",
   "scaleup",
   "template",
+  "transition1",
+  "transition2",
   "toggle-actions",
   "untitled",
   "xmas",
