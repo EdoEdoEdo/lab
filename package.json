@@ -18,7 +18,7 @@
     "dat.gui": "^0.7.7",
     "file-loader": "^6.2.0",
     "glslCanvas": "^0.1.7",
-    "gsap": "^3.8.0",
+    "gsap": "^3.10.4",
     "howler": "^2.2.3",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
@@ -38,7 +38,9 @@
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.8.0",
     "lodash.throttle": "^4.1.1",
-    "splitting": "^1.0.6"
+    "splitting": "^1.0.6",
+    "@studio-freight/lenis": "^0.1.12",
+    "split-type": "^0.3.2"
   },
   "devDependencies": {
     "auto-bind": "^5.0.1",

@@ -16,6 +16,7 @@ const pages = [
   "breath",
   "box",
   "camera",
+  "cpt",
   "coconut",
   "cripto",
   "cloth-studios",
