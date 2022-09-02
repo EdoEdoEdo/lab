@@ -8,6 +8,7 @@ const pages = [
   "album",
   "airplanes",
   "aviator",
+  "bag",
   "band",
   "barba1",
   "barba2",
