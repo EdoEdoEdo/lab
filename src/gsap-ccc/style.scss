@@ -1,0 +1,41 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body
+{
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    border: 2px solid #ccc;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+.weird-gliches {
+    polyline, line {
+        fill: rgb(216, 216, 216);
+        stroke: rgb(0, 0, 0);
+        stroke-width: 22px;
+        stroke-linejoin: miter;
+        stroke-linecap: square;
+    }
+
+    line {
+        //opacity:0.1;
+    }
+
+    svg {
+        width:500px;
+    }
+}
+
+
+

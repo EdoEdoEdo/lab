@@ -30,6 +30,7 @@ const pages = [
   "flowmap",
   "geometries",
   "glitch",
+  "gsap-ccc",
   "houdini",
   "horizontal",
   "howler",
