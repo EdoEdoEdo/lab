@@ -84,6 +84,7 @@ const pages = [
   "xmas",
   "zippy",
   "webgl-flag",
+  "webgi",
   "workers1",
   "workers2",
   "workers3",
