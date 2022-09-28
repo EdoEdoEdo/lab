@@ -1,8 +1,5 @@
 import './style.scss';
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import Stats from 'three/examples/jsm/libs/stats.module'
-import * as dat from 'dat.gui'
+
 
 import {
   ViewerApp,
@@ -47,7 +44,7 @@ async function setupViewer(){
 
   viewer.renderer.refreshPipeline()
 
-  await manager.addFromPath("webgi/camera.glb")
+  await manager.addFromPath("webgi/drill3.glb")
 
   viewer.getPlugin(TonemapPlugin).config.clipBackground = true // in case its set to false in the glb
 
